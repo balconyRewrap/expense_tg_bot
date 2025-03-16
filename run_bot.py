@@ -1,5 +1,4 @@
-"""
-This module serves as the entry point for running the Telegram bot.
+"""Module serves as the entry point for running the Telegram bot.
 
 It performs the following tasks:
     - Imports necessary modules and components.
@@ -15,14 +14,10 @@ from dispatcher import dp
 
 
 async def _reset_redis_db() -> None:
-    """
-    Asynchronously resets the Redis database by deleting all keys.
+    """Asynchronously resets the Redis database by deleting all keys.
 
     This function retrieves all keys from the Redis database and deletes them.
     It uses the `redis_client` to perform these operations.
-
-    Returns:
-        None
     """
     keys = await redis_client.keys("*")
     if keys:
@@ -30,15 +25,11 @@ async def _reset_redis_db() -> None:
 
 
 async def main() -> None:
-    """
-    Is main entry point for the bot.
+    """Is main entry point for the bot.
 
     This asynchronous function performs the following tasks:
     1. Resets the Redis database.
     2. Starts polling the bot for updates.
-
-    Returns:
-        None
     """
     await _reset_redis_db()
     await dp.start_polling(bot)

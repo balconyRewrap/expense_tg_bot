@@ -1,4 +1,4 @@
-"""This module configures the database connection for the tg_bot_funko project.
+"""Module configures the database connection for the tg_bot_funko project.
 
 It uses environment variables to set up the PostgreSQL database connection
 parameters and creates an asynchronous SQLAlchemy engine and session maker.
