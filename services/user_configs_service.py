@@ -1,11 +1,15 @@
 """Services for user configuration operations."""
 import contextlib
 
-from database.crud.categories import get_user_categories_by_tg_id
+from database.crud.categories import add_user_categories, get_user_categories_by_tg_id
 from database.crud.user_configs import change_user_config_language, get_user_config_by_id
 from database.exceptions import CategoryNotFoundError, UserConfigNotFoundError, UserNotFoundError
 
 type CategoryData = tuple[str, int]
+
+
+class UserConfigNotChangedError(Exception):
+    """Raised when a user configuration is not changed."""
 
 
 async def user_config_exist_by_tg_id(tg_id: int) -> bool:
@@ -74,6 +78,24 @@ async def set_language_by_tg_id(tg_id: int, language: str) -> None:
     """
     with contextlib.suppress(UserConfigNotFoundError):
         await change_user_config_language(tg_id, language)
+
+
+async def add_user_expenses_categories(tg_id: int, categories: list[str]) -> None:
+    """Add expense categories for a user based on their Telegram ID.
+
+    Args:
+        tg_id (int): The Telegram ID of the user.
+        categories (list[str]): A list of category names to add for the user.
+
+    Raises:
+        UserConfigNotChangedError: If the user configuration is not changed.
+    """
+    try:
+        await add_user_categories(tg_id, categories)
+    except UserNotFoundError as exception:
+        raise UserConfigNotChangedError("User not found") from exception
+    except UserConfigNotFoundError as exception:
+        raise UserConfigNotChangedError("User config not found") from exception
 
 
 async def get_user_expenses_categories(tg_id: int) -> list[CategoryData] | None:

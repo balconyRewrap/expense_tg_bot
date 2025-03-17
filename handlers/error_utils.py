@@ -9,7 +9,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 from aiogram_i18n import I18nContext
 
-from handlers.keyboard import get_menu_keyboard, get_menu_keyboard_error_tg_id
+from handlers.keyboards import get_menu_keyboard, get_menu_keyboard_error_tg_id
 
 
 class SafeExitProtocol(Protocol):
