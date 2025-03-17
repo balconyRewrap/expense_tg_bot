@@ -8,7 +8,7 @@ from aiogram_i18n.types import InlineKeyboardButton, InlineKeyboardMarkup
 from handlers.add_expense.states import AddExpenseStatesGroup
 from handlers.basic.states import start_menu
 from handlers.error_utils import handle_error_situation
-from handlers.keyboard import get_menu_keyboard, get_post_menu_keyboard
+from handlers.keyboards import get_menu_keyboard, get_post_menu_keyboard
 from services.expenses_service import ExpenseNotAddedError, add_expense
 from services.user_configs_service import get_currency_by_tg_id, get_user_expenses_categories
 
@@ -67,7 +67,7 @@ async def handle_add_expense(message: types.Message, state: FSMContext, i18n: I1
         return
     await state.update_data(currency=currency)
     await message.answer(
-        i18n.get("GET_AMOUNT_MESSAGE", currency=currency),
+        i18n.get("INPUT_AMOUNT_MESSAGE", currency=currency),
         reply_markup=get_post_menu_keyboard(i18n),
     )
     await state.set_state(AddExpenseStatesGroup.entering_amount)
@@ -116,7 +116,7 @@ async def handle_amount(message: types.Message, state: FSMContext, i18n: I18nCon
         return
     await state.update_data(amount=amount)
     await state.set_state(AddExpenseStatesGroup.entering_name)
-    await message.answer(i18n.get("GET_EXPENSE_NAME"), reply_markup=get_post_menu_keyboard(i18n))
+    await message.answer(i18n.get("INPUT_EXPENSE_NAME"), reply_markup=get_post_menu_keyboard(i18n))
 
 
 @add_expense_router.message(AddExpenseStatesGroup.entering_name)
@@ -148,6 +148,7 @@ async def handle_name(message: types.Message, state: FSMContext, i18n: I18nConte
     )
 
 
+# TODO(BalconyRewrap): Add category pagination for callback buttons
 @add_expense_router.callback_query(AddExpenseStatesGroup.selecting_category)
 async def handle_category(callback_query: types.CallbackQuery, state: FSMContext, i18n: I18nContext) -> None:
     """Handle the selection of an expense category from a callback query.

@@ -4,9 +4,11 @@ from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, LazyProxy
 
 from config import LANGUAGES
-from handlers.basic.states import RegistrationStates, start_menu
+from handlers.basic.states import start_menu
 from handlers.error_utils import handle_error_situation
-from handlers.keyboard import get_menu_keyboard, get_registration_category_keyboard
+from handlers.handlers_utils import add_category_handler
+from handlers.keyboards import get_add_categories_keyboard, get_menu_keyboard
+from handlers.registration.states import RegistrationStates
 from services.users_service import UserNotRegisteredError, add_user
 
 registration_router: Router = Router()
@@ -27,7 +29,7 @@ async def start_registration(message: types.Message, state: FSMContext, i18n: I1
     await state.set_state(RegistrationStates.waiting_for_language)
 
     await message.answer(
-        i18n.get("GET_LANGAUGE_MESSAGE"),
+        i18n.get("CHOOSE_LANGAUGE_MESSAGE"),
         reply_markup=_get_language_inline_keyboard(),
     )
 
@@ -52,7 +54,7 @@ async def set_language_handler(callback_query: types.CallbackQuery, state: FSMCo
     await state.update_data(locale=language)
     await state.set_state(RegistrationStates.waiting_for_currency)
     await callback_query.message.answer(
-        i18n.get("GET_CURRENCY_MESSAGE"),
+        i18n.get("INPUT_CURRENCY_MESSAGE"),
     )
 
 
@@ -76,8 +78,8 @@ async def currency_handler(message: types.Message, state: FSMContext, i18n: I18n
     await state.update_data(currency=currency)
     await state.set_state(RegistrationStates.waiting_for_categories)
     await message.answer(
-        i18n.get("GET_CATEGORIES_MESSAGE"),
-        reply_markup=get_registration_category_keyboard(i18n),
+        i18n.get("INPUT_CATEGORIES_REGISTRATION_MESSAGE"),
+        reply_markup=get_add_categories_keyboard(i18n),
     )
 
 
@@ -88,15 +90,6 @@ async def currency_handler(message: types.Message, state: FSMContext, i18n: I18n
 async def categories_handler(message: types.Message, state: FSMContext, i18n: I18nContext) -> None:
     """Handle the addition of new categories during the registration process.
 
-    This asynchronous function processes a message from the user to add a new category
-    to their list of categories. It performs the following steps:
-    1. Checks if the message contains user information. If not, it handles the error.
-    2. Retrieves the new category from the message text.
-    3. If the new category is empty, it handles the error.
-    4. Retrieves the current state data and appends the new category to the list of categories.
-    5. Updates the state with the new list of categories.
-    6. Sends a message to the user asking for the next category, with a keyboard for input.
-
     Args:
         message (types.Message): The message object from the user.
         state (FSMContext): The finite state machine context for managing user state.
@@ -106,17 +99,7 @@ async def categories_handler(message: types.Message, state: FSMContext, i18n: I1
         await handle_error_situation(message, state, i18n, i18n.get("ERROR_USER_INFO"), _ensure_safe_exit)
         return
 
-    new_category = message.text
-    if not new_category:
-        await handle_error_situation(message, state, i18n, i18n.get("ERROR_CATEGORIES"), _ensure_safe_exit)
-    state_data = await state.get_data()
-    categories = state_data.get("categories", [])
-    categories.append(new_category)
-    await state.update_data(categories=categories)
-    await message.answer(
-        i18n.get("GET_NEXT_CATEGORY_MESSAGE"),
-        reply_markup=get_registration_category_keyboard(i18n),
-    )
+    await add_category_handler(message, state, i18n, _ensure_safe_exit)
 
 
 @registration_router.message(F.text == LazyProxy("REGISTRATION_CATEGORY_END_BUTTON"))

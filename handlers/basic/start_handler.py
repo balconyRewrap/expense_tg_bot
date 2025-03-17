@@ -4,16 +4,16 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, LazyProxy
 
-from handlers.basic.registration_handler import start_registration
 from handlers.basic.states import start_menu
 from handlers.error_utils import handle_error_situation
-from handlers.keyboard import get_menu_keyboard
+from handlers.keyboards import get_menu_keyboard
+from handlers.registration.handler import start_registration
 from services.user_configs_service import user_config_exist_by_tg_id
 
 start_router: Router = Router()
 
 
-@start_router.message(F.text.casefold() == LazyProxy("MAIN_MENU_BUTTON", case="lower"))
+@start_router.message(F.text == LazyProxy("MAIN_MENU_BUTTON"))
 @start_router.message(Command("start"))
 async def cmd_start(message: types.Message, state: FSMContext, i18n: I18nContext) -> None:
     """Handle the /start command.

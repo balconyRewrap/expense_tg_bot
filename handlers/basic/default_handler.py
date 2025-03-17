@@ -10,7 +10,7 @@ from aiogram_i18n import I18nContext
 
 from handlers.basic.states import start_menu
 from handlers.error_utils import handle_error_situation
-from handlers.keyboard import get_menu_keyboard
+from handlers.keyboards import get_menu_keyboard
 
 default_router: Router = Router()
 
