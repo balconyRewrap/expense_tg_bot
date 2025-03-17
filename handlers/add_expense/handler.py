@@ -1,6 +1,5 @@
 """Module contains the handler functions for adding an expense in the expense tracking bot."""
 from aiogram import F, Router, types  # noqa: WPS347
-from aiogram.filters.callback_data import CallbackData
 from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, LazyProxy
 from aiogram_i18n.types import InlineKeyboardButton, InlineKeyboardMarkup
@@ -8,25 +7,22 @@ from aiogram_i18n.types import InlineKeyboardButton, InlineKeyboardMarkup
 from handlers.add_expense.states import AddExpenseStatesGroup
 from handlers.basic.states import start_menu
 from handlers.error_utils import handle_error_situation
+from handlers.handlers_utils import (
+    NavigationCallbackData,
+    SelectedCategory,
+    get_categories_inline_keyboard_and_total_pages,
+)
 from handlers.keyboards import get_menu_keyboard, get_post_menu_keyboard
 from services.expenses_service import ExpenseNotAddedError, add_expense
-from services.user_configs_service import get_currency_by_tg_id, get_user_expenses_categories
+from services.user_configs_service import get_currency_by_tg_id
 
 add_expense_router: Router = Router()
 MAXIMUM_EXPENSE_AMOUNT = 1000000
-MAXIMUM_CATEGORY_PER_ROW = 2
 
-
-class SelectedCategory(CallbackData, prefix="category"):
-    """ChoosenCategory is a data class that represents a chosen category in the expense tracking bot.
-
-    Attributes:
-        category_id (int): The unique identifier for the category.
-        category_name (str): The name of the category.
-    """
-
-    category_id: int
-    category_name: str
+ADD_EXPENSE_CALLBACK_CATEGORY_DATA = NavigationCallbackData(
+    next_page="next_page",
+    prev_page="prev_page",
+)
 
 
 @add_expense_router.message(start_menu, F.text == LazyProxy("ADD_EXPENSE_BUTTON"))
@@ -142,14 +138,81 @@ async def handle_name(message: types.Message, state: FSMContext, i18n: I18nConte
         return
     await state.update_data(name=message.text)
     await state.set_state(AddExpenseStatesGroup.selecting_category)
+    inline_keyboard_markup, total_pages = await get_categories_inline_keyboard_and_total_pages(
+        message.from_user.id,
+        page=0,
+        navigation_callback_data=ADD_EXPENSE_CALLBACK_CATEGORY_DATA,
+    )
+    if not inline_keyboard_markup or not total_pages:
+        await handle_error_situation(
+            message=message,
+            state=state,
+            i18n=i18n,
+            answer_text=i18n.get("ERROR_NO_CATEGORIES"),
+            ensure_safe_exit=_ensure_safe_exit,
+        )
+    # its already checked upper. Not 1 or Not None = True
+    await state.update_data(current_page_category=0, last_page_category=total_pages - 1)  # pyright: ignore[reportOptionalOperand]
     await message.answer(
         i18n.get("CHOOSE_CATEGORY"),
-        reply_markup=await _get_categories_inline_keyboard(message.from_user.id),
+        reply_markup=inline_keyboard_markup,
     )
 
 
-# TODO(BalconyRewrap): Add category pagination for callback buttons
-@add_expense_router.callback_query(AddExpenseStatesGroup.selecting_category)
+@add_expense_router.callback_query(F.data == "next_page", AddExpenseStatesGroup.selecting_category)
+async def next_page_button_handler(callback_query: types.CallbackQuery, state: FSMContext) -> None:
+    """Handle the callback query for the "next page" button in the expense tracking bot.
+
+    This function updates the current page of categories in the user's state and
+    calls the function to handle displaying the categories list.
+
+    Args:
+        callback_query (types.CallbackQuery): The callback query object from the Telegram bot.
+        state (FSMContext): The finite state machine context for the current user.
+    """
+    if not isinstance(callback_query.message, types.Message):
+        return
+    # it takes user_id from callback query, not message, because user_id from message is nonsense
+    user_id = callback_query.from_user.id
+    state_data = await state.get_data()
+    current_page = state_data.get("current_page_category", 0)
+    last_page = state_data.get("last_page_category", 0)
+    if current_page == last_page:
+        await state.update_data(current_page_category=0)
+    else:
+        await state.update_data(current_page_category=current_page + 1)
+
+    await _handle_categories_list(user_id, callback_query.message, state)
+
+
+@add_expense_router.callback_query(F.data == "prev_page", AddExpenseStatesGroup.selecting_category)
+async def prev_page_button_handler(callback_query: types.CallbackQuery, state: FSMContext) -> None:
+    """Handle the callback query for the "previous page" button in the expense tracking bot.
+
+    This function updates the current page of the category list to the previous page.
+    If the current page is the first page, it wraps around to the last page.
+
+    Args:
+        callback_query (types.CallbackQuery): The callback query object from the Telegram bot.
+        state (FSMContext): The finite state machine context for the current user.
+    """
+    if not isinstance(callback_query.message, types.Message):
+        return
+    # it takes user_id from callback query, not message, because user_id from message is nonsense
+    user_id = callback_query.from_user.id
+    state_data = await state.get_data()
+    current_page = state_data.get("current_page_category", 0)
+    last_page = state_data.get("last_page_category", 0)
+
+    if current_page == 0:
+        await state.update_data(current_page_category=last_page)
+    else:
+        await state.update_data(current_page_category=current_page - 1)
+
+    await _handle_categories_list(user_id, callback_query.message, state)
+
+
+@add_expense_router.callback_query(AddExpenseStatesGroup.selecting_category, F.data.not_contains("page"))
 async def handle_category(callback_query: types.CallbackQuery, state: FSMContext, i18n: I18nContext) -> None:
     """Handle the selection of an expense category from a callback query.
 
@@ -237,6 +300,23 @@ async def handle_confirmation(callback_query: types.CallbackQuery, state: FSMCon
         await _handle_cancel(callback_query, state, i18n)
         return
     await _handle_confirm(callback_query, state, i18n)
+
+
+async def _handle_categories_list(user_id: int, message: types.Message, state: FSMContext) -> None:
+    if not message.from_user:
+        return
+    state_data = await state.get_data()
+    current_page = state_data.get("current_page_category") or 0
+    inline_keyboard_markup, _ = await get_categories_inline_keyboard_and_total_pages(
+        user_id,
+        page=current_page,
+        navigation_callback_data=ADD_EXPENSE_CALLBACK_CATEGORY_DATA,
+    )
+    if not inline_keyboard_markup:
+        return
+    await message.edit_reply_markup(
+        reply_markup=inline_keyboard_markup,
+    )
 
 
 async def _handle_cancel(callback_query: types.CallbackQuery, state: FSMContext, i18n: I18nContext) -> None:
@@ -327,41 +407,6 @@ def _parse_amount(text: str) -> float | None:
         return None
 
 
-async def _get_categories_inline_keyboard(tg_id: int) -> types.InlineKeyboardMarkup | None:
-    """Asynchronously generates an inline keyboard markup with user expense categories.
-
-    Args:
-        tg_id (int): The Telegram user ID.
-
-    Returns:
-        types.InlineKeyboardMarkup | None: An inline keyboard markup with buttons for each user category,
-        or None if the user has no categories.
-
-    The inline keyboard will have a maximum number of buttons per row defined by MAXIMUM_CATEGORY_PER_ROW.
-    Each button will display the category name and have callback data in the format "category_{category_id}".
-    """
-    user_categories = await get_user_expenses_categories(tg_id)
-    if not user_categories:
-        return None
-    inline_keyboard = []
-    categories_in_row = 0
-    buttons_row = []
-    for category_name, category_id in user_categories:
-        if categories_in_row == MAXIMUM_CATEGORY_PER_ROW:
-            inline_keyboard.append(buttons_row)
-            buttons_row = []
-            categories_in_row = 0
-        button = types.InlineKeyboardButton(
-            text=category_name,
-            callback_data=SelectedCategory(category_id=category_id, category_name=category_name).pack(),
-        )
-        buttons_row.append(button)
-        categories_in_row += 1
-    if buttons_row:
-        inline_keyboard.append(buttons_row)
-    return types.InlineKeyboardMarkup(inline_keyboard=inline_keyboard)
-
-
 async def _ensure_safe_exit(state: FSMContext) -> None:
     """Ensure a safe exit by resetting the state and clearing sensitive data.
 
@@ -374,4 +419,6 @@ async def _ensure_safe_exit(state: FSMContext) -> None:
         name=None,
         category_id=None,
         currency=None,
+        current_page_category=0,
+        last_page_category=0,
     )
