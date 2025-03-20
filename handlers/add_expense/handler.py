@@ -307,7 +307,7 @@ async def _handle_categories_list(user_id: int, message: types.Message, state: F
         return
     state_data = await state.get_data()
     current_page = state_data.get("current_page_category") or 0
-    inline_keyboard_markup, _ = await get_categories_inline_keyboard_and_total_pages(
+    inline_keyboard_markup, _ = await get_categories_inline_keyboard_and_total_pages(  # noqa: VNE003
         user_id,
         page=current_page,
         navigation_callback_data=ADD_EXPENSE_CALLBACK_CATEGORY_DATA,
@@ -413,6 +413,7 @@ async def _ensure_safe_exit(state: FSMContext) -> None:
     Args:
         state (FSMContext): The finite state machine context to be reset.
     """
+    # TODO(balconyRewrap): Понять чем является callbackdata для категории, чтобы при выходе её обнулять
     await state.set_state(start_menu)
     await state.update_data(
         amount=None,

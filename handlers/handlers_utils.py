@@ -68,9 +68,10 @@ async def add_category_handler(
         reply_markup=get_add_categories_keyboard(i18n),
     )
 
+
 # I haven't found a way to avoid two DB queries without making the handler fetch all categories itself.
 # So func gets so bad return
-async def get_categories_inline_keyboard_and_total_pages(  # noqa: WPS118
+async def get_categories_inline_keyboard_and_total_pages(  # noqa: WPS118, FNE007
     tg_id: int,
     page: int,
     navigation_callback_data: NavigationCallbackData,
