@@ -14,7 +14,6 @@ from config import logging
 # Pyright is unable to infer the type of the API_TOKEN variable from the decouple config function.
 API_TOKEN: str = config("API_TOKEN")  # pyright: ignore[reportAssignmentType]
 bot = Bot(token=API_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
-# TODO(balconyRewrap): Добавить после каждого handle_error_situation принудительный return
 
 
 async def send_message_to_user(user_id: int, text: str) -> None:

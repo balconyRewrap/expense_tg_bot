@@ -31,6 +31,7 @@ async def add_categories_handler(message: types.Message, state: FSMContext, i18n
             answer_text=i18n.get("ERROR_USER_INFO"),
             ensure_safe_exit=_ensure_safe_exit,
         )
+        return
 
     await state.set_state(waiting_categories)
     await message.answer(

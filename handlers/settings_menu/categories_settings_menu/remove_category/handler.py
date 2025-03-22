@@ -16,8 +16,6 @@ from handlers.settings_menu.categories_settings_menu.states import categories_se
 from handlers.settings_menu.states import settings_menu
 from services.user_configs_service import UserConfigNotChangedError, remove_user_expenses_category
 
-# TODO(balconyRewrap): протестировать функционал
-
 REMOVE_CATEGORY_CALLBACK_DATA = NavigationCallbackData(
     next_page="next_page_remove_category",
     prev_page="prev_page_remove_category",
@@ -65,6 +63,7 @@ async def remove_category_handler(message: types.Message, state: FSMContext, i18
             answer_text=i18n.get("ERROR_NO_CATEGORIES"),
             ensure_safe_exit=_ensure_safe_exit,
         )
+        return
     # its already checked upper. Not 1 or Not None = True
     await state.update_data(current_page_remove_category=0, last_page_remove_category=total_pages - 1)  # pyright: ignore[reportOptionalOperand]
     await message.answer(
@@ -316,8 +315,9 @@ async def _ensure_safe_exit(state: FSMContext) -> None:
     Args:
         state (FSMContext): The finite state machine context to be reset.
     """
-    # TODO(balconyRewrap): Понять чем является callbackdata для категории, чтобы при выходе её обнулять
     await state.update_data(
+        name=None,
+        category_id=None,
         current_page_remove_category=0,
         last_page_remove_category=0,
     )

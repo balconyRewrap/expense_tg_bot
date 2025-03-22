@@ -25,9 +25,3 @@ async def reset_database() -> None:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
     await engine.dispose()
-
-
-if __name__ == "__main__":
-    # TODO(balconyRewrap): delete after debugging
-    import asyncio  # noqa: WPS433
-    asyncio.run(reset_database())
