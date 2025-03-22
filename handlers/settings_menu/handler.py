@@ -33,6 +33,7 @@ async def settings_menu_handler(message: Message, state: FSMContext, i18n: I18nC
             answer_text=i18n.get("ERROR_USER_INFO"),
             ensure_safe_exit=_ensure_safe_exit,
         )
+        return
     await state.set_state(settings_menu)
 
     await message.answer(

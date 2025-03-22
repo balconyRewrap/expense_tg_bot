@@ -151,6 +151,7 @@ async def handle_name(message: types.Message, state: FSMContext, i18n: I18nConte
             answer_text=i18n.get("ERROR_NO_CATEGORIES"),
             ensure_safe_exit=_ensure_safe_exit,
         )
+        return
     # its already checked upper. Not 1 or Not None = True
     await state.update_data(current_page_category=0, last_page_category=total_pages - 1)  # pyright: ignore[reportOptionalOperand]
     await message.answer(
@@ -307,7 +308,7 @@ async def _handle_categories_list(user_id: int, message: types.Message, state: F
         return
     state_data = await state.get_data()
     current_page = state_data.get("current_page_category") or 0
-    inline_keyboard_markup, _ = await get_categories_inline_keyboard_and_total_pages(
+    inline_keyboard_markup, _ = await get_categories_inline_keyboard_and_total_pages(  # noqa: VNE003
         user_id,
         page=current_page,
         navigation_callback_data=ADD_EXPENSE_CALLBACK_CATEGORY_DATA,
@@ -417,7 +418,6 @@ async def _ensure_safe_exit(state: FSMContext) -> None:
     await state.update_data(
         amount=None,
         name=None,
-        category_id=None,
         currency=None,
         current_page_category=0,
         last_page_category=0,

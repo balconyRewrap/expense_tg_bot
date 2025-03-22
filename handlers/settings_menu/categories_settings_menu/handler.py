@@ -33,6 +33,7 @@ async def category_settings_menu_handler(message: Message, state: FSMContext, i1
             answer_text=i18n.get("ERROR_USER_INFO"),
             ensure_safe_exit=_ensure_safe_exit,
         )
+        return
 
     await message.answer(
         text=i18n.get("CHOOSE_CATEGORY_SETTINGS_MENU_ITEM"),

@@ -32,7 +32,8 @@ async def add_user(tg_id: int) -> None:
         await session.refresh(new_user)
 
 
-async def user_exist_by_id(session: AsyncSession, tg_id: int) -> bool:
+# name of this function is bool-like.
+async def user_exist_by_id(session: AsyncSession, tg_id: int) -> bool:  # noqa: FNE005
     """Check if a user exists in the database by their Telegram ID.
 
     Args:

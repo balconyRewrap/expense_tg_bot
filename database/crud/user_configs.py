@@ -33,7 +33,7 @@ async def add_user_config(tg_id: int, language: str, currency: str) -> None:
             session.add(new_user_config)
             await session.commit()
         except IntegrityError as exception:
-            await session.rollback()
+            await session.rollback()  # noqa: ASYNC120
             raise UniqueDublicateError("Failed to add user configuration due to integrity error") from exception
         await session.refresh(new_user_config)
 
@@ -79,7 +79,8 @@ async def get_user_config_by_id(tg_id: int) -> UserConfig:
         return user_config
 
 
-async def user_config_exist_by_id(session: AsyncSession, tg_id: int) -> bool:
+# name of this function is bool-like.
+async def user_config_exist_by_id(session: AsyncSession, tg_id: int) -> bool:  # noqa: FNE005
     """Check if a user configuration exists in the database.
 
     This asynchronous function queries the database to determine if a user configuration

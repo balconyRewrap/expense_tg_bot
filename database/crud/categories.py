@@ -1,7 +1,7 @@
 """CRUD operations for the Category model."""
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
-from sqlalchemy.sql import select
+from sqlalchemy.sql import delete, select
 
 from database.config import async_session_maker
 from database.crud.user_configs import user_config_exist_by_id
@@ -63,7 +63,36 @@ async def get_user_categories_by_tg_id(tg_id: int) -> list[Category]:
         raise CategoryNotFoundError(f"No categories found for user with id {tg_id}")
 
 
-async def user_category_exist_by_id(session: AsyncSession, category_id: int) -> bool:
+async def remove_user_category_by_id(tg_id: int, category_id: int) -> None:
+    """Remove a category from a user's list of categories.
+
+    Args:
+        tg_id (int): The Telegram ID of the user.
+        category_id (int): The ID of the category to remove.
+
+    Raises:
+        UserNotFoundError: If the user with the given Telegram ID does not exist.
+        UserConfigNotFoundError: If the user configuration for the given Telegram ID does not exist.
+        CategoryNotFoundError: If the category with the given ID does not
+        Exception: Any other exception, that can raise during the deleting.
+    """
+    async with async_session_maker() as session:
+        if not await user_exist_by_id(session, tg_id):
+            raise UserNotFoundError(f"User with id {tg_id} not found")
+        if not await user_config_exist_by_id(session, tg_id):
+            raise UserConfigNotFoundError(f"UserConfig for User with id {tg_id} not found")
+        if not await user_category_exist_by_id(session, category_id):
+            raise CategoryNotFoundError(f"Category with id {category_id} not found")
+        try:
+            await session.execute(delete(Category).where(Category.id == category_id))
+            await session.commit()
+        except Exception:
+            await session.rollback()  # noqa: ASYNC120
+            raise
+
+
+# name of this function is bool-like.
+async def user_category_exist_by_id(session: AsyncSession, category_id: int) -> bool:  # noqa: FNE005
     """Check if a category exists in the database.
 
     Args:
