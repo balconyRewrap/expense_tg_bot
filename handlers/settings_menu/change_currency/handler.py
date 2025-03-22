@@ -1,4 +1,4 @@
-"""Handle the settings menu interaction for the Telegram bot."""
+"""Handlers for changing the currency in the settings menu."""
 from aiogram import F, Router, types  # noqa: WPS347  # noqa: WPS347
 from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, LazyProxy

@@ -10,6 +10,7 @@ from handlers.registration.handler import registration_router
 from handlers.settings_menu.categories_settings_menu.add_categories.handler import add_category_router
 from handlers.settings_menu.categories_settings_menu.handler import category_settings_menu_router
 from handlers.settings_menu.change_currency.handler import change_currency_router
+from handlers.settings_menu.change_language.handler import change_language_router
 from handlers.settings_menu.handler import settings_menu_router
 
 dp = Dispatcher(bot=bot, storage=storage)
@@ -26,6 +27,7 @@ dp.include_router(settings_menu_router)
 # settings menu routers
 dp.include_router(category_settings_menu_router)
 dp.include_router(change_currency_router)
+dp.include_router(change_language_router)
 
 # categories menu routers
 dp.include_router(add_category_router)

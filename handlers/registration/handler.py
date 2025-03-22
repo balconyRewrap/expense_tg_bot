@@ -7,7 +7,7 @@ from config import LANGUAGES
 from handlers.basic.states import start_menu
 from handlers.error_utils import handle_error_situation
 from handlers.handlers_utils import add_category_handler
-from handlers.keyboards import get_add_categories_keyboard, get_menu_keyboard
+from handlers.keyboards import get_add_categories_keyboard, get_language_inline_keyboard, get_menu_keyboard
 from handlers.registration.states import RegistrationStates
 from services.users_service import UserNotRegisteredError, add_user
 
@@ -30,12 +30,11 @@ async def start_registration(message: types.Message, state: FSMContext, i18n: I1
 
     await message.answer(
         i18n.get("CHOOSE_LANGAUGE_MESSAGE"),
-        reply_markup=_get_language_inline_keyboard(),
+        reply_markup=get_language_inline_keyboard(),
     )
 
 
-@registration_router.callback_query(F.data == "en", RegistrationStates.waiting_for_language)
-@registration_router.callback_query(F.data == "ru", RegistrationStates.waiting_for_language)
+@registration_router.callback_query(F.data.in_(LANGUAGES), RegistrationStates.waiting_for_language)
 async def set_language_handler(callback_query: types.CallbackQuery, state: FSMContext, i18n: I18nContext) -> None:
     """Handle the language selection callback for the user.
 
@@ -163,31 +162,6 @@ async def end_registration_handler(message: types.Message, state: FSMContext, i1
     )
     await message.answer(registration_details, reply_markup=get_menu_keyboard(i18n))
     await _ensure_safe_exit(state)
-
-
-def _get_language_inline_keyboard() -> types.InlineKeyboardMarkup:
-    """Create an inline keyboard markup for language selection.
-
-    The keyboard contains two buttons for selecting languages:
-    English ("en") and Russian ("ru").
-
-    Returns:
-        types.InlineKeyboardMarkup: An inline keyboard markup with language selection buttons.
-    """
-    return types.InlineKeyboardMarkup(
-        inline_keyboard=[
-            [
-                types.InlineKeyboardButton(
-                    text=LANGUAGES["en"],
-                    callback_data="en",
-                ),
-                types.InlineKeyboardButton(
-                    text=LANGUAGES["ru"],
-                    callback_data="ru",
-                ),
-            ],
-        ],
-    )
 
 
 async def _ensure_safe_exit(state: FSMContext) -> None:

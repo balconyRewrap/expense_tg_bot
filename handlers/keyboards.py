@@ -1,6 +1,9 @@
 """Module provides functions to generate various types of Telegram bot keyboards using the aiogram library."""
+from aiogram import types
 from aiogram_i18n import I18nContext
 from aiogram_i18n.types import KeyboardButton, ReplyKeyboardMarkup
+
+from config import LANGUAGES
 
 
 def get_settings_menu_keyboard(i18n: I18nContext) -> ReplyKeyboardMarkup:
@@ -93,6 +96,31 @@ def get_add_categories_keyboard(i18n: I18nContext) -> ReplyKeyboardMarkup:
     """
     categories = [[KeyboardButton(text=i18n.get("CATEGORY_END_BUTTON"))]]
     return ReplyKeyboardMarkup(keyboard=categories, resize_keyboard=True)
+
+
+def get_language_inline_keyboard() -> types.InlineKeyboardMarkup:
+    """Create an inline keyboard markup for language selection.
+
+    The keyboard contains two buttons for selecting languages:
+    English ("en") and Russian ("ru").
+
+    Returns:
+        types.InlineKeyboardMarkup: An inline keyboard markup with language selection buttons.
+    """
+    return types.InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                types.InlineKeyboardButton(
+                    text=LANGUAGES["en"],
+                    callback_data="en",
+                ),
+                types.InlineKeyboardButton(
+                    text=LANGUAGES["ru"],
+                    callback_data="ru",
+                ),
+            ],
+        ],
+    )
 
 
 def _get_basic_buttons(i18n: I18nContext) -> list[list[KeyboardButton]]:
