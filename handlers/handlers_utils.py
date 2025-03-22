@@ -59,6 +59,7 @@ async def add_category_handler(
     new_category = message.text
     if not new_category:
         await handle_error_situation(message, state, i18n, i18n.get("ERROR_CATEGORIES"), ensure_safe_exit)
+        return
     state_data = await state.get_data()
     categories = state_data.get("categories", [])
     categories.append(new_category)
@@ -102,6 +103,37 @@ async def get_categories_inline_keyboard_and_total_pages(  # noqa: WPS118, FNE00
         total_pages,
         navigation_callback_data,
     ), total_pages
+
+
+def get_confirmation_inline_keyboard_markup(
+    confirm_i18n_text: str,
+    cancel_i18n_text: str,
+    i18n: I18nContext,
+) -> types.InlineKeyboardMarkup:
+    """Create an inline keyboard markup with two buttons: one for confirmation and one for cancellation.
+
+    Args:
+        confirm_i18n_text (str): The key for the confirmation button text in the i18n context.
+        cancel_i18n_text (str): The key for the cancellation button text in the i18n context.
+        i18n (I18nContext): The internationalization context used to retrieve localized text.
+
+    Returns:
+        types.InlineKeyboardMarkup: An inline keyboard markup containing the confirmation and cancellation buttons.
+    """
+    return types.InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                types.InlineKeyboardButton(
+                    text=i18n.get(confirm_i18n_text),
+                    callback_data="confirm",
+                ),
+                types.InlineKeyboardButton(
+                    text=i18n.get(cancel_i18n_text),
+                    callback_data="cancel",
+                ),
+            ],
+        ],
+    )
 
 
 def _get_total_category_pages(categories: list[CategoryData]) -> int:
