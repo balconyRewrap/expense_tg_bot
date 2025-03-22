@@ -86,3 +86,22 @@ async def get_all_expenses_by_tg_id(tg_id: int) -> list[Expense]:
             # Return the list of expenses associated with the user
             return user.expenses
         raise ExpenseNotFoundError(f"No expenses found for user with id {tg_id}")
+
+
+async def get_all_currencies_used_by_tg_id(tg_id: int) -> list[str] | None:
+    """Retrieve a list of distinct currencies used by a user identified by their Telegram ID.
+
+    This asynchronous function queries the database to fetch all unique currencies
+    associated with the expenses of a specific user.
+
+    Args:
+        tg_id (int): The Telegram ID of the user whose currencies are to be retrieved.
+
+    Returns:
+        list[str] | None: A list of unique currency codes (as strings) used by the user,
+        or None if no currencies are found.
+    """
+    async with async_session_maker() as session:
+        query = select(Expense.currency).where(Expense.user_tg_id == tg_id).distinct()
+        result = await session.execute(query)
+        return [row[0] for row in result.all()]

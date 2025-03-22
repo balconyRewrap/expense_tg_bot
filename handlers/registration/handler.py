@@ -74,6 +74,7 @@ async def currency_handler(message: types.Message, state: FSMContext, i18n: I18n
     currency = message.text
     if not currency:
         await handle_error_situation(message, state, i18n, i18n.get("ERROR_CURRENCY"), _ensure_safe_exit)
+        return
 
     await state.update_data(currency=currency)
     await state.set_state(RegistrationStates.waiting_for_categories)

@@ -2,7 +2,6 @@
 from aiogram import F, Router, types  # noqa: WPS347
 from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, LazyProxy
-from aiogram_i18n.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from handlers.add_expense.states import AddExpenseStatesGroup
 from handlers.basic.states import start_menu
@@ -11,6 +10,7 @@ from handlers.handlers_utils import (
     NavigationCallbackData,
     SelectedCategory,
     get_categories_inline_keyboard_and_total_pages,
+    get_confirmation_inline_keyboard_markup,
 )
 from handlers.keyboards import get_menu_keyboard, get_post_menu_keyboard
 from services.expenses_service import ExpenseNotAddedError, add_expense
@@ -253,19 +253,10 @@ async def handle_category(callback_query: types.CallbackQuery, state: FSMContext
     await state.set_state(AddExpenseStatesGroup.confirming_expense)
     await callback_query.message.answer(
         i18n.get("CONFIRM_EXPENSE", name=expense_name, amount=amount, category_name=category_name, currency=currency),
-        reply_markup=InlineKeyboardMarkup(
-            inline_keyboard=[
-                [
-                    InlineKeyboardButton(
-                        text=i18n.get("CONFIRM_EXPENSE_BUTTON"),
-                        callback_data="confirm",
-                    ),
-                    InlineKeyboardButton(
-                        text=i18n.get("CANCEL_EXPENSE_BUTTON"),
-                        callback_data="cancel",
-                    ),
-                ],
-            ],
+        reply_markup=get_confirmation_inline_keyboard_markup(
+            confirm_i18n_text="CONFIRM_EXPENSE_BUTTON",
+            cancel_i18n_text="CANCEL_EXPENSE_BUTTON",
+            i18n=i18n,
         ),
     )
 

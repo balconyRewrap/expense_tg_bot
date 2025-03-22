@@ -2,13 +2,13 @@
 from aiogram import F, Router, types  # noqa: WPS347
 from aiogram.fsm.context import FSMContext
 from aiogram_i18n import I18nContext, LazyProxy
-from aiogram_i18n.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from handlers.error_utils import handle_error_situation
 from handlers.handlers_utils import (
     NavigationCallbackData,
     SelectedCategory,
     get_categories_inline_keyboard_and_total_pages,
+    get_confirmation_inline_keyboard_markup,
 )
 from handlers.keyboards import get_menu_keyboard
 from handlers.settings_menu.categories_settings_menu.remove_category.states import RemoveCategoryStatesGroup
@@ -16,10 +16,11 @@ from handlers.settings_menu.categories_settings_menu.states import categories_se
 from handlers.settings_menu.states import settings_menu
 from services.user_configs_service import UserConfigNotChangedError, remove_user_expenses_category
 
-REMOVE_CATEGORY_CALLBACK_DATA = NavigationCallbackData(
+REMOVE_CATEGORY_PAGES_CALLBACK_DATA = NavigationCallbackData(
     next_page="next_page_remove_category",
     prev_page="prev_page_remove_category",
 )
+
 remove_category_router: Router = Router()
 
 
@@ -53,7 +54,7 @@ async def remove_category_handler(message: types.Message, state: FSMContext, i18
     inline_keyboard_markup, total_pages = await get_categories_inline_keyboard_and_total_pages(
         message.from_user.id,
         page=0,
-        navigation_callback_data=REMOVE_CATEGORY_CALLBACK_DATA,
+        navigation_callback_data=REMOVE_CATEGORY_PAGES_CALLBACK_DATA,
     )
     if not inline_keyboard_markup or not total_pages:
         await handle_error_situation(
@@ -178,19 +179,10 @@ async def handle_category(callback_query: types.CallbackQuery, state: FSMContext
     await state.set_state(RemoveCategoryStatesGroup.confirming_removal)
     await callback_query.message.answer(
         i18n.get("CONFIRM_REMOVE_CATEGORY", category_name=category_name),
-        reply_markup=InlineKeyboardMarkup(
-            inline_keyboard=[
-                [
-                    InlineKeyboardButton(
-                        text=i18n.get("CONFIRM_REMOVE_CATEGORY_BUTTON"),
-                        callback_data="confirm",
-                    ),
-                    InlineKeyboardButton(
-                        text=i18n.get("CANCEL_REMOVE_CATEGORY_BUTTON"),
-                        callback_data="cancel",
-                    ),
-                ],
-            ],
+        reply_markup=get_confirmation_inline_keyboard_markup(
+            confirm_i18n_text="CONFIRM_REMOVE_CATEGORY_BUTTON",
+            cancel_i18n_text="CANCEL_REMOVE_CATEGORY_BUTTON",
+            i18n=i18n,
         ),
     )
 
@@ -244,7 +236,7 @@ async def _handle_categories_list(user_id: int, message: types.Message, state: F
     inline_keyboard_markup, _ = await get_categories_inline_keyboard_and_total_pages(  # noqa: VNE003
         user_id,
         page=current_page,
-        navigation_callback_data=REMOVE_CATEGORY_CALLBACK_DATA,
+        navigation_callback_data=REMOVE_CATEGORY_PAGES_CALLBACK_DATA,
     )
     if not inline_keyboard_markup:
         return

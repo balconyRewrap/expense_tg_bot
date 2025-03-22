@@ -56,7 +56,36 @@ async def change_user_config_language(tg_id: int, new_language: str) -> None:
         if not user_config:
             raise UserConfigNotFoundError(f"UserConfig for User with id {tg_id} not found")
         user_config.language = new_language  # pyright: ignore[reportAttributeAccessIssue]
-        await session.commit()
+        try:
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
+
+
+async def change_user_config_currency(tg_id: int, new_currency: str) -> None:
+    """Change the currency preference of a user configuration.
+
+    This function updates the currency preference of a user configuration based on the Telegram user ID.
+
+    Args:
+        tg_id (int): The Telegram user ID.
+        new_currency (str): The new currency preference.
+
+    Raises:
+        UserConfigNotFoundError: If the user configuration is not found.
+    """
+    async with async_session_maker() as session:
+        select_result = await session.execute(select(UserConfig).filter_by(user_tg_id=tg_id))
+        user_config = select_result.scalars().first()
+        if not user_config:
+            raise UserConfigNotFoundError(f"UserConfig for User with id {tg_id} not found")
+        user_config.currency = new_currency  # pyright: ignore[reportAttributeAccessIssue]
+        try:
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
 
 
 async def get_user_config_by_id(tg_id: int) -> UserConfig:
