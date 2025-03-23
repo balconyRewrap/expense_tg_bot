@@ -180,8 +180,8 @@ def _get_categories_inline_keyboard_markup(
     Returns:
         types.InlineKeyboardMarkup: The inline keyboard markup with category buttons and navigation buttons.
     """
-    inline_keyboard = _get_categories_inline_keyboard(paginated_categories)
-    inline_keyboard.append(_get_navigation_inline_keyboard(page, total_pages, navigation_callback_data))
+    inline_keyboard: list[list[types.InlineKeyboardButton]] = _get_categories_inline_keyboard(paginated_categories)
+    inline_keyboard.append(get_navigation_inline_keyboard(page, total_pages, navigation_callback_data))
     return types.InlineKeyboardMarkup(inline_keyboard=inline_keyboard)
 
 
@@ -193,7 +193,7 @@ def _get_categories_inline_keyboard(paginated_categories: list[CategoryData]) ->
             a category name and category ID.
 
     Returns:
-        list[list[types.InlineKeyboardButton]]: A list of lists, where each inner list represents
+        list[list[InlineKeyboardButton]]: A list of lists, where each inner list represents
             a row of inline keyboard buttons for the categories.
     """
     inline_keyboard = []
@@ -215,7 +215,7 @@ def _get_categories_inline_keyboard(paginated_categories: list[CategoryData]) ->
     return inline_keyboard
 
 
-def _get_navigation_inline_keyboard(
+def get_navigation_inline_keyboard(
     page: int,
     total_pages: int,
     navigation_callback_data: NavigationCallbackData,
@@ -228,8 +228,10 @@ def _get_navigation_inline_keyboard(
         navigation_callback_data (NavigationCallbackData): An object containing callback data for navigation buttons.
 
     Returns:
-        list[list[types.InlineKeyboardButton]]: A list of lists containing InlineKeyboardButton objects for navigation.
+        list[list[InlineKeyboardButton]]: A list of lists containing InlineKeyboardButton objects for navigation.
     """
+    if total_pages == 1:
+        return []
     previous_page_button = types.InlineKeyboardButton(
         text="<<",
         callback_data=navigation_callback_data.prev_page,

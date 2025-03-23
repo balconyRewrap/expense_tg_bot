@@ -26,6 +26,24 @@ def get_settings_menu_keyboard(i18n: I18nContext) -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(keyboard=settings_buttons, resize_keyboard=True)
 
 
+def get_statistics_menu_keyboard(i18n: I18nContext) -> ReplyKeyboardMarkup:
+    """Generate a statistics menu keyboard for a Telegram bot.
+
+    Args:
+        i18n (I18nContext):
+            The internationalization context to fetch localized button texts.
+
+    Returns:
+        ReplyKeyboardMarkup:
+            A Telegram ReplyKeyboardMarkup object with the statistics menu buttons.
+    """
+    statistics_buttons = [
+        [KeyboardButton(text=i18n.get("SHOW_CUSTOM_EXPENSES_STATISTICS_BUTTON"))],
+        [_get_main_menu_button(i18n)],
+    ]
+    return ReplyKeyboardMarkup(keyboard=statistics_buttons, resize_keyboard=True)
+
+
 def get_category_settings_menu_keyboard(i18n: I18nContext) -> ReplyKeyboardMarkup:
     """Generate a category settings menu keyboard for a Telegram bot.
 
