@@ -152,8 +152,7 @@ async def handle_name(message: types.Message, state: FSMContext, i18n: I18nConte
             ensure_safe_exit=_ensure_safe_exit,
         )
         return
-    # its already checked upper. Not 1 or Not None = True
-    await state.update_data(current_page_category=0, last_page_category=total_pages - 1)  # pyright: ignore[reportOptionalOperand]
+    await state.update_data(current_page_category=0, last_page_category=total_pages - 1)
     await message.answer(
         i18n.get("CHOOSE_CATEGORY"),
         reply_markup=inline_keyboard_markup,

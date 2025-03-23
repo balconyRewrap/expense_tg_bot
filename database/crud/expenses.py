@@ -103,5 +103,5 @@ async def get_all_currencies_used_by_tg_id(tg_id: int) -> list[str] | None:
     """
     async with async_session_maker() as session:
         query = select(Expense.currency).where(Expense.user_tg_id == tg_id).distinct()
-        result = await session.execute(query)
-        return [row[0] for row in result.all()]
+        query_result = await session.execute(query)
+        return [row[0] for row in query_result.all()]
