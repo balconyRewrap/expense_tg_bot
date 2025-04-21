@@ -100,7 +100,7 @@ CHOOSE_STATISTICS_METHOD = Выберите метод анализа трат.
 
     Если хотите вернуться в главное меню, нажмите кнопку "Главное меню".
 
-CHOOSE_EXPENSE_CUSTOM_STATISTICS_PERIOD = 
+CHOOSE_EXPENSE_STATISTICS_PERIOD = 
     Выберите период, за который хотите увидеть статистику.
 
     Если хотите вернуться в главное меню, нажмите кнопку "Главное меню".
@@ -210,6 +210,8 @@ LANGUAGE_CHANGED = Язык успешно изменен!
 # -----------------------------
 WAIT_FOR_CUSTOM_STATISTICS = Пожалуйста, подождите, идет подсчет статистики...
 
+WAIT_FOR_MONTH_STATISTICS = Пожалуйста, подождите, идет подсчет статистики за месяц...
+
 # -----------------------------
 # ℹ️ OTHER TEXTS
 # -----------------------------
@@ -268,6 +270,7 @@ CANCEL_CHANGE_CURRENCY_BUTTON = Не изменять валюту
 # STATISTICS MENU BUTTONS
 
 SHOW_CUSTOM_EXPENSES_STATISTICS_BUTTON = Показать статистику по категориям и дате
+SHOW_MONTH_EXPENSES_STATISTICS_BUTTON = Показать статистику за месяц
 
 # CUSTOM STATISTICS BUTTONS
 

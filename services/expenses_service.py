@@ -156,7 +156,11 @@ def _filter_expenses_by_period(expenses: list[Expense], period: CustomPeriod) ->
     """
     start_date, end_date = period
     # It works, pyright doesn't understand SQLALCHEMY objects
-    return [expense for expense in expenses if start_date <= expense.date <= end_date]  # pyright: ignore[reportGeneralTypeIssues]
+    return [
+        expense
+        for expense in expenses
+        if start_date <= expense.date <= end_date  # pyright: ignore[reportGeneralTypeIssues]
+    ]
 
 
 def _filter_expenses_by_category_ids(

@@ -12,17 +12,10 @@ from database.models import Expense
 from handlers.basic.states import start_menu
 from handlers.error_utils import handle_error_situation
 from handlers.handlers_utils import (
+    NavigationCallbackData,
     SelectedCategory,
     get_categories_inline_keyboard_and_total_pages,
     get_navigation_inline_keyboard,
-)
-from handlers.statistics_menu.custom_statistics.constants import (
-    ALL_CATEGORIES_NAME,
-    CATEGORIES_CHOOSE_PAGES_NAVIGATION,
-    CUSTOM_PERIODS,
-    DEFAULT_PERIODS,
-    END_CATEGORIES_SELECT_CALLBACK_DATA,
-    STATISTICS_CATEGORIES_PAGES_NAVIGATION,
 )
 from services.expenses_service import (
     ALL_CATEGORIES_ID,
@@ -70,18 +63,26 @@ async def ensure_safe_exit(state: FSMContext) -> None:
     await state.set_state(start_menu)
 
 
-async def send_statistics(user_id: int, message: types.Message, state: FSMContext, i18n: I18nContext) -> None:
-    """Send statistics to the user based on their data and preferences.
+async def send_statistics(
+    user_id: int,
+    message: types.Message,
+    state: FSMContext,
+    i18n: I18nContext,
+    statistics_navigation_callback_data: NavigationCallbackData,
+) -> None:
+    """Send statistical data to the user in a paginated format.
 
-    This function retrieves statistics pages for the user and sends the first page
-    along with a navigation inline keyboard. If no statistics are available, it handles
-    the error situation by sending an appropriate error message and ensuring a safe exit.
+    This function retrieves statistical pages for the user and sends the first page
+    along with navigation buttons. If no statistics are available, it handles the
+    error situation by sending an appropriate error message.
 
     Args:
         user_id (int): The ID of the user requesting the statistics.
-        message (types.Message): The message object from the user.
-        state (FSMContext): The finite state machine context for the user.
+        message (types.Message): The message object representing the user's request.
+        state (FSMContext): The finite state machine context for managing user state.
         i18n (I18nContext): The internationalization context for localized messages.
+        statistics_navigation_callback_data (NavigationCallbackData): Callback data
+            used for navigation between statistical pages.
     """
     statististics_pages = await get_statistics_pages(user_id, message, state, i18n)
     if not statististics_pages:
@@ -101,31 +102,39 @@ async def send_statistics(user_id: int, message: types.Message, state: FSMContex
                 get_navigation_inline_keyboard(
                     page=0,
                     total_pages=len(statististics_pages),
-                    navigation_callback_data=STATISTICS_CATEGORIES_PAGES_NAVIGATION,
+                    navigation_callback_data=statistics_navigation_callback_data,
                 ),
             ],
         ),
     )
 
 
-def get_period_inline_keyboard_markup(i18n: I18nContext) -> InlineKeyboardMarkup:
-    """Generate an inline keyboard markup for selecting a time period.
+def get_period_inline_keyboard_markup(
+    i18n: I18nContext,
+    default_periods: dict[str, str],
+    custom_periods: dict[str, str],
+) -> InlineKeyboardMarkup:
+    """Generate an inline keyboard markup for selecting periods.
 
     Args:
-        i18n (I18nContext): The internationalization context used to fetch localized button text.
+        i18n (I18nContext): The internationalization context used for translating button text.
+        default_periods (dict[str, str]): A dictionary where keys are button text identifiers
+            for default periods and values are their corresponding callback data.
+        custom_periods (dict[str, str]): A dictionary where keys are button text identifiers
+            for custom periods and values are their corresponding callback data.
 
     Returns:
-        InlineKeyboardMarkup: An inline keyboard markup containing buttons for different time periods.
-            The buttons include options for day, week, month, year, all time, and custom period.
+        InlineKeyboardMarkup: An inline keyboard markup containing buttons for both default
+        and custom periods.
     """
     period_buttons: list[list[types.InlineKeyboardButton]] = [
         [
             types.InlineKeyboardButton(text=i18n.get(button_text), callback_data=callback_data)
-            for button_text, callback_data in DEFAULT_PERIODS.items()
+            for button_text, callback_data in default_periods.items()
         ],
         [
             types.InlineKeyboardButton(text=i18n.get(button_text), callback_data=callback_data)
-            for button_text, callback_data in CUSTOM_PERIODS.items()
+            for button_text, callback_data in custom_periods.items()
         ],
     ]
     return InlineKeyboardMarkup(inline_keyboard=period_buttons)
@@ -135,22 +144,31 @@ async def get_categories_inline_keyboard_markup(
     tg_id: int,
     page: int,
     i18n: I18nContext,
+    categories_choose_pages_navigation: NavigationCallbackData,
+    all_categories_name: str,
+    end_categories_select_callback_data: str,
+    all_categories_id: int = ALL_CATEGORIES_ID,
 ) -> InlineKeyboardMarkup | None:
-    """Generate an inline keyboard markup for selecting expense categories.
+    """Generate an inline keyboard markup for selecting categories.
 
     Args:
-        tg_id (int): The Telegram user ID.
-        page (int): The current page number.
-        i18n (I18nContext): The internationalization context for localizing button text.
+        tg_id (int): Telegram user ID.
+        page (int): Current page number for category navigation.
+        i18n (I18nContext): Internationalization context for retrieving localized strings.
+        categories_choose_pages_navigation (NavigationCallbackData): Callback data for handling
+            category navigation between pages.
+        all_categories_name (str): Display name for the "All Categories" button.
+        end_categories_select_callback_data (str): Callback data for the "End Selection" button.
+        all_categories_id (int, optional): ID representing all categories. Defaults to ALL_CATEGORIES_ID.
 
     Returns:
-        (InlineKeyboardMarkup | None): An inline keyboard markup with buttons for selecting expense categories.
-            If the user has no categories, returns None.
+        (InlineKeyboardMarkup | None): The generated inline keyboard markup, or None if no categories
+        or pages are available.
     """
     inline_keyboard_markup, total_pages = await get_categories_inline_keyboard_and_total_pages(
         tg_id,
         page,
-        CATEGORIES_CHOOSE_PAGES_NAVIGATION,
+        categories_choose_pages_navigation,
     )
     if not inline_keyboard_markup or not total_pages:
         return None
@@ -159,7 +177,10 @@ async def get_categories_inline_keyboard_markup(
         [
             types.InlineKeyboardButton(
                 text=i18n.get("ALL_CATEGORIES_BUTTON"),
-                callback_data=SelectedCategory(category_id=ALL_CATEGORIES_ID, category_name=ALL_CATEGORIES_NAME).pack(),
+                callback_data=SelectedCategory(
+                    category_id=all_categories_id,
+                    category_name=all_categories_name,
+                ).pack(),
             ),
         ],
     ]
@@ -168,21 +189,35 @@ async def get_categories_inline_keyboard_markup(
         [
             types.InlineKeyboardButton(
                 text=i18n.get("END_CATEGORIES_SELECT_BUTTON"),
-                callback_data=END_CATEGORIES_SELECT_CALLBACK_DATA,
+                callback_data=end_categories_select_callback_data,
             ),
         ],
     )
     return InlineKeyboardMarkup(inline_keyboard=inline_keyboard_custom)
 
 
-async def handle_categories_list(user_id: int, message: types.Message, state: FSMContext, i18n: I18nContext) -> None:
-    """Handle the display of a paginated list of categories in an inline keyboard.
+async def handle_categories_list(
+    user_id: int,
+    message: types.Message,
+    state: FSMContext,
+    i18n: I18nContext,
+    categories_choose_pages_navigation: NavigationCallbackData,
+    all_categories_name: str,
+    end_categories_select_callback_data: str,
+) -> None:
+    """Handle the display and navigation of a paginated list of categories in a Telegram bot.
 
     Args:
-        user_id (int): The Telegram user ID of the user.
-        message (types.Message): The Telegram message object to be edited.
-        state (FSMContext): The finite state machine context for the current user session.
-        i18n (I18nContext): The internationalization context for localized strings.
+        user_id (int): The Telegram user ID of the user interacting with the bot.
+        message (types.Message): The Telegram message object representing the user's interaction.
+        state (FSMContext): The finite state machine context for managing user states.
+        i18n (I18nContext): The internationalization context for handling translations.
+        categories_choose_pages_navigation (NavigationCallbackData):
+            Callback data for navigating between pages of categories.
+
+        all_categories_name (str): The name representing the "all categories" option.
+        end_categories_select_callback_data (str):
+            Callback data to be used when the category selection process ends.
     """
     if not message.from_user:
         return
@@ -192,6 +227,9 @@ async def handle_categories_list(user_id: int, message: types.Message, state: FS
         tg_id=user_id,
         page=current_page,
         i18n=i18n,
+        categories_choose_pages_navigation=categories_choose_pages_navigation,
+        all_categories_name=all_categories_name,
+        end_categories_select_callback_data=end_categories_select_callback_data,
     )
     if not inline_keyboard_markup:
         return
@@ -243,7 +281,7 @@ async def get_statistics_pages(
     )
     end_date = (
         datetime.strptime(custom_period_end_date, "%d.%m.%Y").date()  # noqa: DTZ007
-        if custom_period_start_date
+        if custom_period_end_date
         else None
     )
     categories = {int(category_id): category_name for category_id, category_name in categories.items()}
@@ -403,7 +441,7 @@ def _get_expense_period_from_callback_data(period: str) -> ExpensePeriod | None:
         period (str): The string representation of the expense period.
 
     Returns:
-        ExpensePeriod | None: An instance of ExpensePeriod if the conversion is successful,
+        (ExpensePeriod | None): An instance of ExpensePeriod if the conversion is successful,
         otherwise None if the input string is invalid.
     """
     try:

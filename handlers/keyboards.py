@@ -39,6 +39,7 @@ def get_statistics_menu_keyboard(i18n: I18nContext) -> ReplyKeyboardMarkup:
     """
     statistics_buttons = [
         [KeyboardButton(text=i18n.get("SHOW_CUSTOM_EXPENSES_STATISTICS_BUTTON"))],
+        [KeyboardButton(text=i18n.get("SHOW_MONTH_EXPENSES_STATISTICS_BUTTON"))],
         [_get_main_menu_button(i18n)],
     ]
     return ReplyKeyboardMarkup(keyboard=statistics_buttons, resize_keyboard=True)
