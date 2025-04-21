@@ -2,24 +2,22 @@
 
 Constants:
     DEFAULT_PERIODS (Final[dict]): A dictionary mapping button identifiers to their corresponding period strings.
-        - "DAY_PERIOD_BUTTON": Represents the daily period.
-        - "WEEK_PERIOD_BUTTON": Represents the weekly period.
-        - "MONTH_PERIOD_BUTTON": Represents the monthly period.
-        - "YEAR_PERIOD_BUTTON": Represents the yearly period.
-        - "ALL_PERIOD_BUTTON": Represents the all-time period.
+        "DAY_PERIOD_BUTTON": Represents the daily period.
+        "WEEK_PERIOD_BUTTON": Represents the weekly period.
+        "MONTH_PERIOD_BUTTON": Represents the monthly period.
+        "YEAR_PERIOD_BUTTON": Represents the yearly period.
+        "ALL_PERIOD_BUTTON": Represents the all-time period.
 
     CUSTOM_PERIODS (Final[dict]): A dictionary mapping button identifiers to their corresponding custom period strings.
-        - "CUSTOM_PERIOD_BUTTON": Represents a custom period.
+        "CUSTOM_PERIOD_BUTTON": Represents a custom period.
 
-    CATEGORIES_CHOOSE_PAGES_NAVIGATION (NavigationCallbackData): Callback data for navigating between pages
-    when choosing categories.
-        - next_page: Identifier for the next page.
-        - prev_page: Identifier for the previous page.
+    CATEGORIES_CHOOSE_PAGES_NAVIGATION (NavigationCallbackData): Callback data for navigating between pages.
+        next_page: Identifier for the next page.
+        prev_page: Identifier for the previous page.
 
-    STATISTICS_CATEGORIES_PAGES_NAVIGATION (NavigationCallbackData): Callback data for navigating between pages in
-    the statistics categories view.
-        - next_page: Identifier for the next page.
-        - prev_page: Identifier for the previous page.
+    STATISTICS_CATEGORIES_PAGES_NAVIGATION (NavigationCallbackData): Callback data for navigating between pages.
+        next_page: Identifier for the next page.
+        prev_page: Identifier for the previous page.
 
     ALL_CATEGORIES_NAME (str): A string representing the name for all categories.
 
