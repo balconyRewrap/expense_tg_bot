@@ -158,4 +158,7 @@ async def get_user_expenses_categories(tg_id: int) -> list[CategoryData] | None:
         user_categories = await categories_crud.get_user_categories_by_tg_id(tg_id)
     except (UserNotFoundError, UserConfigNotFoundError, CategoryNotFoundError):
         return None
-    return [(str(category.name), int(category.id)) for category in user_categories]  # pyright: ignore[reportArgumentType]
+    return [
+        (str(category.name), int(category.id))  # pyright: ignore[reportArgumentType]
+        for category in user_categories
+    ]

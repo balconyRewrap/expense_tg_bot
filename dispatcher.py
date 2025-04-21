@@ -1,4 +1,13 @@
-# TODO (balconyRewrap): add documentation when all routers will be in DP
+"""Module initializes and configures the Dispatcher for the Telegram bot using the aiogram library.
+
+It sets up middleware, includes various routers for handling bot commands and interactions,
+and organizes the bot's functionality into modular components.
+
+Usage:
+This module is intended to be imported and executed as part of the bot's initialization process.
+It ensures that all necessary routers and middleware are properly
+configured and included in the dispatcher.
+"""
 from aiogram import Dispatcher
 
 from bot import bot
@@ -15,6 +24,7 @@ from handlers.settings_menu.change_language.handler import change_language_route
 from handlers.settings_menu.handler import settings_menu_router
 from handlers.statistics_menu.custom_statistics.handler import custom_statistics_router
 from handlers.statistics_menu.handler import statistics_menu_router
+from handlers.statistics_menu.month_statistics.handler import month_statistics_router
 
 dp = Dispatcher(bot=bot, storage=storage)
 i18n_middleware.setup(dp)
@@ -39,6 +49,7 @@ dp.include_router(remove_category_router)
 
 # statistics menu routers
 dp.include_router(custom_statistics_router)
+dp.include_router(month_statistics_router)
 
 # default router
 dp.include_router(default_router)
