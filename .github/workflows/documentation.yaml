@@ -8,6 +8,16 @@ permissions:
 jobs:
   docs:
     runs-on: ubuntu-latest
+    env:
+      API_TOKEN: ${{ secrets.API_TOKEN }}
+      REDIS_HOST: ${{ secrets.REDIS_HOST }}
+      REDIS_PORT: ${{ secrets.REDIS_PORT }}
+      REDIS_DB: ${{ secrets.REDIS_DB }}
+      PGSQL_HOST: ${{ secrets.PGSQL_HOST }}
+      PGSQL_PORT: ${{ secrets.PGSQL_PORT }}
+      PGSQL_DB: ${{ secrets.PGSQL_DB }}
+      PGSQL_USER: ${{ secrets.PGSQL_USER }}
+      PGSQL_PASSWORD: ${{ secrets.PGSQL_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
 
