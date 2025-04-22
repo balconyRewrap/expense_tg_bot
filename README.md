@@ -90,10 +90,8 @@ uv run run_bot.py
 
 ## 🌍 Localization
 
-- 🇬🇧 English
-- 🇷🇺 Russian
-
-The bot automatically detects and switches language based on the user's Telegram settings.
+- **en** English
+- **ru** Russian
 
 ---
 
@@ -205,10 +203,8 @@ uv run run_bot.py
 
 ## 🌍 Локализация
 
-- 🇬🇧 Английский  
-- 🇷🇺 Русский
-
-Бот автоматически определяет язык на основе настроек Telegram пользователя.
+- **en** Английский
+- **ru** Русский
 
 ---
 
