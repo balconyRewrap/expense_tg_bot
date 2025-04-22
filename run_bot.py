@@ -2,6 +2,7 @@
 
 Functions:
     _reset_redis_db: Asynchronously resets the Redis database by deleting all keys.
+
     main: Asynchronous main entry point for the bot, which resets the Redis database
           and starts polling for updates.
 
