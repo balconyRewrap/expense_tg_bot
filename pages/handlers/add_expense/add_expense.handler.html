@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Handler &mdash; Expense TG Bot  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="States" href="add_expense.states.html" />
+    <link rel="prev" title="Add Expense Handler" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">TG Bot</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../database/index.html">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../services/index.html">Services</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Handlers</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Add Expense Handler</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Handler</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler._ensure_safe_exit"><code class="docutils literal notranslate"><span class="pre">_ensure_safe_exit()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler._handle_cancel"><code class="docutils literal notranslate"><span class="pre">_handle_cancel()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler._handle_categories_list"><code class="docutils literal notranslate"><span class="pre">_handle_categories_list()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler._handle_confirm"><code class="docutils literal notranslate"><span class="pre">_handle_confirm()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler._parse_amount"><code class="docutils literal notranslate"><span class="pre">_parse_amount()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler.handle_add_expense"><code class="docutils literal notranslate"><span class="pre">handle_add_expense()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler.handle_amount"><code class="docutils literal notranslate"><span class="pre">handle_amount()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler.handle_category"><code class="docutils literal notranslate"><span class="pre">handle_category()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler.handle_confirmation"><code class="docutils literal notranslate"><span class="pre">handle_confirmation()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler.handle_name"><code class="docutils literal notranslate"><span class="pre">handle_name()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler.next_page_button_handler"><code class="docutils literal notranslate"><span class="pre">next_page_button_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#handlers.add_expense.handler.prev_page_button_handler"><code class="docutils literal notranslate"><span class="pre">prev_page_button_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="add_expense.states.html">States</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../basic/index.html">Basic Handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../registration/index.html">Registration Handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../settings_menu/index.html">Settings Menu Handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../statistics_menu/index.html">Statistics Menu Handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modules.html">Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html">Modules</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Expense TG Bot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">TG Bot</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Handlers</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Add Expense Handler</a></li>
+      <li class="breadcrumb-item active">Handler</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/pages/handlers/add_expense/add_expense.handler.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-handlers.add_expense.handler">
+<span id="handler"></span><h1>Handler<a class="headerlink" href="#module-handlers.add_expense.handler" title="Link to this heading"></a></h1>
+<p>Module contains the handler functions for adding an expense in the expense tracking bot.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler._ensure_safe_exit">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">_ensure_safe_exit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler._ensure_safe_exit" title="Link to this definition"></a></dt>
+<dd><p>Ensure a safe exit by resetting the state and clearing sensitive data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>FSMContext</em>) – The finite state machine context to be reset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler._handle_cancel">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">_handle_cancel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CallbackQuery</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i18n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">I18nContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler._handle_cancel" title="Link to this definition"></a></dt>
+<dd><p>Handle the cancellation of an expense operation.</p>
+<p>This function ensures a safe exit from the current state and sends a cancellation
+message to the user if a message is present in the callback query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback_query</strong> (<em>types.CallbackQuery</em>) – The callback query object containing the user’s interaction data.</p></li>
+<li><p><strong>state</strong> (<em>FSMContext</em>) – The finite state machine context for managing user states.</p></li>
+<li><p><strong>i18n</strong> (<em>I18nContext</em>) – The internationalization context for retrieving localized messages.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler._handle_categories_list">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">_handle_categories_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler._handle_categories_list" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler._handle_confirm">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">_handle_confirm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CallbackQuery</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i18n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">I18nContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler._handle_confirm" title="Link to this definition"></a></dt>
+<dd><p>Handle the confirmation of adding an expense.</p>
+<p>This function is triggered by a callback query and processes the confirmation
+of adding an expense. It retrieves necessary data from the state, validates it,
+and attempts to add the expense. If any required data is missing or an error
+occurs during the addition of the expense, it handles the error appropriately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback_query</strong> (<em>types.CallbackQuery</em>) – The callback query object containing
+the user’s interaction data.</p></li>
+<li><p><strong>state</strong> (<em>FSMContext</em>) – The finite state machine context for managing user state.</p></li>
+<li><p><strong>i18n</strong> (<em>I18nContext</em>) – The internationalization context for retrieving localized
+messages.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler._parse_amount">
+<span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">_parse_amount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler._parse_amount" title="Link to this definition"></a></dt>
+<dd><p>Parse the given text to extract an integer amount.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The text to be parsed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parsed amount if it is a valid float within the allowed range,
+otherwise None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(float | None)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler.handle_add_expense">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">handle_add_expense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i18n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">I18nContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler.handle_add_expense" title="Link to this definition"></a></dt>
+<dd><p>Handle the addition of an expense by the user.</p>
+<p>This function is triggered when a user sends a message to add an expense. It performs the following steps:
+1. Checks if the user information is available in the message.
+2. Retrieves the user’s currency based on their Telegram ID.
+3. Updates the state with the user’s currency.
+4. Prompts the user to enter the amount for the expense.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>types.Message</em>) – The message object containing the user’s request to add an expense.</p></li>
+<li><p><strong>state</strong> (<em>FSMContext</em>) – The finite state machine context for managing user states.</p></li>
+<li><p><strong>i18n</strong> (<em>I18nContext</em>) – The internationalization context for retrieving localized messages.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler.handle_amount">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">handle_amount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i18n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">I18nContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler.handle_amount" title="Link to this definition"></a></dt>
+<dd><p>Handle the amount input from the user.</p>
+<p>This function processes the amount entered by the user, validates it, and updates the state accordingly.
+If the user information is missing or the amount is invalid, it handles the error situation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>types.Message</em>) – The message object containing the user’s input.</p></li>
+<li><p><strong>state</strong> (<em>FSMContext</em>) – The finite state machine context for the current user.</p></li>
+<li><p><strong>i18n</strong> (<em>I18nContext</em>) – The internationalization context for retrieving localized strings.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler.handle_category">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">handle_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CallbackQuery</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i18n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">I18nContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler.handle_category" title="Link to this definition"></a></dt>
+<dd><p>Handle the selection of an expense category from a callback query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback_query</strong> (<em>types.CallbackQuery</em>) – The callback query containing the selected category data.</p></li>
+<li><p><strong>state</strong> (<em>FSMContext</em>) – The current state of the finite state machine.</p></li>
+<li><p><strong>i18n</strong> (<em>I18nContext</em>) – The internationalization context for retrieving localized strings.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler.handle_confirmation">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">handle_confirmation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CallbackQuery</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i18n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">I18nContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler.handle_confirmation" title="Link to this definition"></a></dt>
+<dd><p>Handle the confirmation callback query for adding an expense.</p>
+<p>This function processes the user’s confirmation response for adding an expense.
+It validates the callback query data, retrieves necessary state data, and attempts
+to add the expense to the database. If any validation or operation fails, it handles
+the error appropriately by sending an error message to the user and ensuring a safe
+exit from the current state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback_query</strong> (<em>types.CallbackQuery</em>) – The callback query object containing the user’s response.</p></li>
+<li><p><strong>state</strong> (<em>FSMContext</em>) – The finite state machine context for managing user states.</p></li>
+<li><p><strong>i18n</strong> (<em>I18nContext</em>) – The internationalization context for retrieving localized messages.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler.handle_name">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">handle_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i18n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">I18nContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler.handle_name" title="Link to this definition"></a></dt>
+<dd><p>Handle the user’s input for the expense name.</p>
+<p>This function processes the user’s message to extract the expense name and updates the state accordingly.
+If the message does not contain text or user information, it handles the error situation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>types.Message</em>) – The message object containing the user’s input.</p></li>
+<li><p><strong>state</strong> (<em>FSMContext</em>) – The finite state machine context for managing user states.</p></li>
+<li><p><strong>i18n</strong> (<em>I18nContext</em>) – The internationalization context for retrieving localized strings.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler.next_page_button_handler">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">next_page_button_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CallbackQuery</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler.next_page_button_handler" title="Link to this definition"></a></dt>
+<dd><p>Handle the callback query for the “next page” button in the expense tracking bot.</p>
+<p>This function updates the current page of categories in the user’s state and
+calls the function to handle displaying the categories list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback_query</strong> (<em>types.CallbackQuery</em>) – The callback query object from the Telegram bot.</p></li>
+<li><p><strong>state</strong> (<em>FSMContext</em>) – The finite state machine context for the current user.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="handlers.add_expense.handler.prev_page_button_handler">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">handlers.add_expense.handler.</span></span><span class="sig-name descname"><span class="pre">prev_page_button_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CallbackQuery</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FSMContext</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#handlers.add_expense.handler.prev_page_button_handler" title="Link to this definition"></a></dt>
+<dd><p>Handle the callback query for the “previous page” button in the expense tracking bot.</p>
+<p>This function updates the current page of the category list to the previous page.
+If the current page is the first page, it wraps around to the last page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback_query</strong> (<em>types.CallbackQuery</em>) – The callback query object from the Telegram bot.</p></li>
+<li><p><strong>state</strong> (<em>FSMContext</em>) – The finite state machine context for the current user.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Add Expense Handler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="add_expense.states.html" class="btn btn-neutral float-right" title="States" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, balconyRewrap.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

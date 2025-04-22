@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Configs Service &mdash; Expense TG Bot  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Handlers" href="../handlers/index.html" />
+    <link rel="prev" title="Users Service" href="services.users_service.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">TG Bot</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../database/index.html">Database</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="services.expenses_service.html">Expenses Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services.users_service.html">Users Service</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">User Configs Service</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#services.user_configs_service.UserConfigNotChangedError"><code class="docutils literal notranslate"><span class="pre">UserConfigNotChangedError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#services.user_configs_service.add_user_expenses_categories"><code class="docutils literal notranslate"><span class="pre">add_user_expenses_categories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#services.user_configs_service.get_currency_by_tg_id"><code class="docutils literal notranslate"><span class="pre">get_currency_by_tg_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#services.user_configs_service.get_language_by_tg_id"><code class="docutils literal notranslate"><span class="pre">get_language_by_tg_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#services.user_configs_service.get_user_expenses_categories"><code class="docutils literal notranslate"><span class="pre">get_user_expenses_categories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#services.user_configs_service.remove_user_expenses_category"><code class="docutils literal notranslate"><span class="pre">remove_user_expenses_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#services.user_configs_service.set_currency_by_tg_id"><code class="docutils literal notranslate"><span class="pre">set_currency_by_tg_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#services.user_configs_service.set_language_by_tg_id"><code class="docutils literal notranslate"><span class="pre">set_language_by_tg_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#services.user_configs_service.user_config_exist_by_tg_id"><code class="docutils literal notranslate"><span class="pre">user_config_exist_by_tg_id()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../handlers/index.html">Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules.html">Modules</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Expense TG Bot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">TG Bot</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Services</a></li>
+      <li class="breadcrumb-item active">User Configs Service</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/pages/services/services.user_configs_service.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-services.user_configs_service">
+<span id="user-configs-service"></span><h1>User Configs Service<a class="headerlink" href="#module-services.user_configs_service" title="Link to this heading"></a></h1>
+<p>Services for user configuration operations.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="services.user_configs_service.UserConfigNotChangedError">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_configs_service.</span></span><span class="sig-name descname"><span class="pre">UserConfigNotChangedError</span></span><a class="headerlink" href="#services.user_configs_service.UserConfigNotChangedError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when a user configuration is not changed.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.user_configs_service.add_user_expenses_categories">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_configs_service.</span></span><span class="sig-name descname"><span class="pre">add_user_expenses_categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tg_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#services.user_configs_service.add_user_expenses_categories" title="Link to this definition"></a></dt>
+<dd><p>Add expense categories for a user based on their Telegram ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tg_id</strong> (<em>int</em>) – The Telegram ID of the user.</p></li>
+<li><p><strong>categories</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A list of category names to add for the user.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#services.user_configs_service.UserConfigNotChangedError" title="services.user_configs_service.UserConfigNotChangedError"><strong>UserConfigNotChangedError</strong></a> – If the user configuration is not changed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.user_configs_service.get_currency_by_tg_id">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_configs_service.</span></span><span class="sig-name descname"><span class="pre">get_currency_by_tg_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tg_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#services.user_configs_service.get_currency_by_tg_id" title="Link to this definition"></a></dt>
+<dd><p>Retrieve the currency preference for a user based on their Telegram ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tg_id</strong> (<em>int</em>) – The Telegram ID of the user.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The currency preference of the user if found, otherwise None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str | None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../database/database.exceptions.html#database.exceptions.UserConfigNotFoundError" title="database.exceptions.UserConfigNotFoundError"><strong>UserConfigNotFoundError</strong></a> – If the user configuration is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.user_configs_service.get_language_by_tg_id">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_configs_service.</span></span><span class="sig-name descname"><span class="pre">get_language_by_tg_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tg_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#services.user_configs_service.get_language_by_tg_id" title="Link to this definition"></a></dt>
+<dd><p>Retrieve the language preference for a user based on their Telegram ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tg_id</strong> (<em>int</em>) – The Telegram ID of the user.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The language preference of the user if found, otherwise None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str | None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../database/database.exceptions.html#database.exceptions.UserConfigNotFoundError" title="database.exceptions.UserConfigNotFoundError"><strong>UserConfigNotFoundError</strong></a> – If the user configuration is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.user_configs_service.get_user_expenses_categories">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_configs_service.</span></span><span class="sig-name descname"><span class="pre">get_user_expenses_categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tg_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">CategoryData</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#services.user_configs_service.get_user_expenses_categories" title="Link to this definition"></a></dt>
+<dd><p>Fetch the expense categories for a user based on their Telegram ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tg_id</strong> (<em>int</em>) – The Telegram ID of the user.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of CategoryData tuples containing the category name and ID,
+or None if the user or categories are not found.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[CategoryData] | None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="../database/database.exceptions.html#database.exceptions.UserNotFoundError" title="database.exceptions.UserNotFoundError"><strong>UserNotFoundError</strong></a> – If the user is not found.</p></li>
+<li><p><a class="reference internal" href="../database/database.exceptions.html#database.exceptions.UserConfigNotFoundError" title="database.exceptions.UserConfigNotFoundError"><strong>UserConfigNotFoundError</strong></a> – If the user configuration is not found.</p></li>
+<li><p><a class="reference internal" href="../database/database.exceptions.html#database.exceptions.CategoryNotFoundError" title="database.exceptions.CategoryNotFoundError"><strong>CategoryNotFoundError</strong></a> – If the categories are not found.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.user_configs_service.remove_user_expenses_category">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_configs_service.</span></span><span class="sig-name descname"><span class="pre">remove_user_expenses_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tg_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#services.user_configs_service.remove_user_expenses_category" title="Link to this definition"></a></dt>
+<dd><p>Remove an expense category for a user based on their Telegram ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tg_id</strong> (<em>int</em>) – The Telegram ID of the user.</p></li>
+<li><p><strong>category_id</strong> (<em>int</em>) – The ID of category to remove.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#services.user_configs_service.UserConfigNotChangedError" title="services.user_configs_service.UserConfigNotChangedError"><strong>UserConfigNotChangedError</strong></a> – If the user configuration is not changed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.user_configs_service.set_currency_by_tg_id">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_configs_service.</span></span><span class="sig-name descname"><span class="pre">set_currency_by_tg_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tg_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">currency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#services.user_configs_service.set_currency_by_tg_id" title="Link to this definition"></a></dt>
+<dd><p>Set the currency preference for a user identified by their Telegram ID.</p>
+<p>This function attempts to change the currency setting for a user in the user configuration.
+If the user configuration is not found, the exception will be raised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tg_id</strong> (<em>int</em>) – The Telegram ID of the user.</p></li>
+<li><p><strong>currency</strong> (<em>str</em>) – The currency code to set for the user.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#services.user_configs_service.UserConfigNotChangedError" title="services.user_configs_service.UserConfigNotChangedError"><strong>UserConfigNotChangedError</strong></a> – if the user configuration is not changed by any error.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.user_configs_service.set_language_by_tg_id">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_configs_service.</span></span><span class="sig-name descname"><span class="pre">set_language_by_tg_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tg_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#services.user_configs_service.set_language_by_tg_id" title="Link to this definition"></a></dt>
+<dd><p>Set the language preference for a user identified by their Telegram ID.</p>
+<p>This function attempts to change the language setting for a user in the user configuration.
+If the user configuration is not found, the exception will be raised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tg_id</strong> (<em>int</em>) – The Telegram ID of the user.</p></li>
+<li><p><strong>language</strong> (<em>str</em>) – The language code to set for the user.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#services.user_configs_service.UserConfigNotChangedError" title="services.user_configs_service.UserConfigNotChangedError"><strong>UserConfigNotChangedError</strong></a> – if the user configuration is not changed by any error.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="services.user_configs_service.user_config_exist_by_tg_id">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_configs_service.</span></span><span class="sig-name descname"><span class="pre">user_config_exist_by_tg_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tg_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.user_configs_service.user_config_exist_by_tg_id" title="Link to this definition"></a></dt>
+<dd><p>Check if a user configuration exists based on their Telegram ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tg_id</strong> (<em>int</em>) – The Telegram ID of the user.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the user configuration exists, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="services.users_service.html" class="btn btn-neutral float-left" title="Users Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../handlers/index.html" class="btn btn-neutral float-right" title="Handlers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, balconyRewrap.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

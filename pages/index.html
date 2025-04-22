@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TG Bot &mdash; Expense TG Bot  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Database" href="database/index.html" />
+    <link rel="prev" title="💸 Expense Tracker Bot" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TG Bot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database/index.html">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services/index.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handlers/index.html">Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html">Modules</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Expense TG Bot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">TG Bot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pages/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tg-bot">
+<h1>TG Bot<a class="headerlink" href="#tg-bot" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="database/index.html">Database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database/crud/index.html">Database CRUD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database/crud/database.crud.categories.html">CRUD Categories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.categories.html#database.crud.categories._add_user_category"><code class="docutils literal notranslate"><span class="pre">_add_user_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.categories.html#database.crud.categories.add_user_categories"><code class="docutils literal notranslate"><span class="pre">add_user_categories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.categories.html#database.crud.categories.get_user_categories_by_tg_id"><code class="docutils literal notranslate"><span class="pre">get_user_categories_by_tg_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.categories.html#database.crud.categories.remove_user_category_by_id"><code class="docutils literal notranslate"><span class="pre">remove_user_category_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.categories.html#database.crud.categories.user_category_exist_by_id"><code class="docutils literal notranslate"><span class="pre">user_category_exist_by_id()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database/crud/database.crud.expenses.html">CRUD Expenses</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.expenses.html#database.crud.expenses.add_expense"><code class="docutils literal notranslate"><span class="pre">add_expense()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.expenses.html#database.crud.expenses.get_all_currencies_used_by_tg_id"><code class="docutils literal notranslate"><span class="pre">get_all_currencies_used_by_tg_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.expenses.html#database.crud.expenses.get_all_expenses_by_tg_id"><code class="docutils literal notranslate"><span class="pre">get_all_expenses_by_tg_id()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database/crud/database.crud.user_configs.html">CRUD Users Config</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.user_configs.html#database.crud.user_configs.add_user_config"><code class="docutils literal notranslate"><span class="pre">add_user_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.user_configs.html#database.crud.user_configs.change_user_config_currency"><code class="docutils literal notranslate"><span class="pre">change_user_config_currency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.user_configs.html#database.crud.user_configs.change_user_config_language"><code class="docutils literal notranslate"><span class="pre">change_user_config_language()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.user_configs.html#database.crud.user_configs.get_user_config_by_id"><code class="docutils literal notranslate"><span class="pre">get_user_config_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.user_configs.html#database.crud.user_configs.user_config_exist_by_id"><code class="docutils literal notranslate"><span class="pre">user_config_exist_by_id()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database/crud/database.crud.users.html">CRUD Users</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.users.html#database.crud.users.add_user"><code class="docutils literal notranslate"><span class="pre">add_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/crud/database.crud.users.html#database.crud.users.user_exist_by_id"><code class="docutils literal notranslate"><span class="pre">user_exist_by_id()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database/modules.html">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database/database.config.html">Database Config</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database/database.config.html#database.config.PGSQL_HOST"><code class="docutils literal notranslate"><span class="pre">PGSQL_HOST</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.config.html#database.config.PGSQL_PORT"><code class="docutils literal notranslate"><span class="pre">PGSQL_PORT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.config.html#database.config.PGSQL_DB"><code class="docutils literal notranslate"><span class="pre">PGSQL_DB</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.config.html#database.config.PGSQL_USER"><code class="docutils literal notranslate"><span class="pre">PGSQL_USER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.config.html#database.config.PGSQL_PASSWORD"><code class="docutils literal notranslate"><span class="pre">PGSQL_PASSWORD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.config.html#database.config.DATABASE_URL"><code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.config.html#database.config.engine"><code class="docutils literal notranslate"><span class="pre">engine</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.config.html#database.config.async_session_maker"><code class="docutils literal notranslate"><span class="pre">async_session_maker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database/database.database_utils.html">Database Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database/database.database_utils.html#database.database_utils.is_unique_error"><code class="docutils literal notranslate"><span class="pre">is_unique_error()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database/database.exceptions.html">Database Exceptions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database/database.exceptions.html#database.exceptions.CategoryNotFoundError"><code class="docutils literal notranslate"><span class="pre">CategoryNotFoundError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.exceptions.html#database.exceptions.ExpenseNotFoundError"><code class="docutils literal notranslate"><span class="pre">ExpenseNotFoundError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.exceptions.html#database.exceptions.NotFoundError"><code class="docutils literal notranslate"><span class="pre">NotFoundError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.exceptions.html#database.exceptions.UniqueDublicateError"><code class="docutils literal notranslate"><span class="pre">UniqueDublicateError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.exceptions.html#database.exceptions.UserConfigNotFoundError"><code class="docutils literal notranslate"><span class="pre">UserConfigNotFoundError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.exceptions.html#database.exceptions.UserNotFoundError"><code class="docutils literal notranslate"><span class="pre">UserNotFoundError</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database/database.init_db.html">Init Database Module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database/database.init_db.html#database.init_db.init_db"><code class="docutils literal notranslate"><span class="pre">init_db()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database/database.init_db.html#database.init_db.reset_database"><code class="docutils literal notranslate"><span class="pre">reset_database()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database/database.models.html">Database Models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="services/index.html">Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="services/services.expenses_service.html">Expenses Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services/services.users_service.html">Users Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="services/services.users_service.html#services.users_service.UserNotRegisteredError"><code class="docutils literal notranslate"><span class="pre">UserNotRegisteredError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/services.users_service.html#services.users_service.add_user"><code class="docutils literal notranslate"><span class="pre">add_user()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="services/services.user_configs_service.html">User Configs Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="services/services.user_configs_service.html#services.user_configs_service.UserConfigNotChangedError"><code class="docutils literal notranslate"><span class="pre">UserConfigNotChangedError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/services.user_configs_service.html#services.user_configs_service.add_user_expenses_categories"><code class="docutils literal notranslate"><span class="pre">add_user_expenses_categories()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/services.user_configs_service.html#services.user_configs_service.get_currency_by_tg_id"><code class="docutils literal notranslate"><span class="pre">get_currency_by_tg_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/services.user_configs_service.html#services.user_configs_service.get_language_by_tg_id"><code class="docutils literal notranslate"><span class="pre">get_language_by_tg_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/services.user_configs_service.html#services.user_configs_service.get_user_expenses_categories"><code class="docutils literal notranslate"><span class="pre">get_user_expenses_categories()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/services.user_configs_service.html#services.user_configs_service.remove_user_expenses_category"><code class="docutils literal notranslate"><span class="pre">remove_user_expenses_category()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/services.user_configs_service.html#services.user_configs_service.set_currency_by_tg_id"><code class="docutils literal notranslate"><span class="pre">set_currency_by_tg_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/services.user_configs_service.html#services.user_configs_service.set_language_by_tg_id"><code class="docutils literal notranslate"><span class="pre">set_language_by_tg_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/services.user_configs_service.html#services.user_configs_service.user_config_exist_by_tg_id"><code class="docutils literal notranslate"><span class="pre">user_config_exist_by_tg_id()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="handlers/index.html">Handlers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="handlers/add_expense/index.html">Add Expense Handler</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html">Handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler._ensure_safe_exit"><code class="docutils literal notranslate"><span class="pre">_ensure_safe_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler._handle_cancel"><code class="docutils literal notranslate"><span class="pre">_handle_cancel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler._handle_categories_list"><code class="docutils literal notranslate"><span class="pre">_handle_categories_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler._handle_confirm"><code class="docutils literal notranslate"><span class="pre">_handle_confirm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler._parse_amount"><code class="docutils literal notranslate"><span class="pre">_parse_amount()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler.handle_add_expense"><code class="docutils literal notranslate"><span class="pre">handle_add_expense()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler.handle_amount"><code class="docutils literal notranslate"><span class="pre">handle_amount()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler.handle_category"><code class="docutils literal notranslate"><span class="pre">handle_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler.handle_confirmation"><code class="docutils literal notranslate"><span class="pre">handle_confirmation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler.handle_name"><code class="docutils literal notranslate"><span class="pre">handle_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler.next_page_button_handler"><code class="docutils literal notranslate"><span class="pre">next_page_button_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.handler.html#handlers.add_expense.handler.prev_page_button_handler"><code class="docutils literal notranslate"><span class="pre">prev_page_button_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/add_expense/add_expense.states.html">States</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/add_expense/add_expense.states.html#handlers.add_expense.states.AddExpenseStatesGroup"><code class="docutils literal notranslate"><span class="pre">AddExpenseStatesGroup</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/add_expense/add_expense.states.html#handlers.add_expense.states.AddExpenseStatesGroup.entering_amount"><code class="docutils literal notranslate"><span class="pre">AddExpenseStatesGroup.entering_amount</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/add_expense/add_expense.states.html#handlers.add_expense.states.AddExpenseStatesGroup.entering_name"><code class="docutils literal notranslate"><span class="pre">AddExpenseStatesGroup.entering_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/add_expense/add_expense.states.html#handlers.add_expense.states.AddExpenseStatesGroup.selecting_category"><code class="docutils literal notranslate"><span class="pre">AddExpenseStatesGroup.selecting_category</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/add_expense/add_expense.states.html#handlers.add_expense.states.AddExpenseStatesGroup.confirming_expense"><code class="docutils literal notranslate"><span class="pre">AddExpenseStatesGroup.confirming_expense</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="handlers/basic/index.html">Basic Handlers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="handlers/basic/basic.default_handler.html">Default Handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/basic/basic.default_handler.html#handlers.basic.default_handler.basic_router"><code class="docutils literal notranslate"><span class="pre">basic_router</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/basic/basic.default_handler.html#handlers.basic.default_handler.handle_all_other_messages"><code class="docutils literal notranslate"><span class="pre">handle_all_other_messages()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/basic/basic.start_handler.html">Start Handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/basic/basic.start_handler.html#handlers.basic.start_handler.cmd_start"><code class="docutils literal notranslate"><span class="pre">cmd_start()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/basic/basic.states.html">Basic States</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/basic/basic.states.html#handlers.basic.states.start_menu"><code class="docutils literal notranslate"><span class="pre">start_menu</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="handlers/registration/index.html">Registration Handler</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="handlers/registration/handlers.registration.handler.html">Handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/registration/handlers.registration.handler.html#handlers.registration.handler._ensure_safe_exit"><code class="docutils literal notranslate"><span class="pre">_ensure_safe_exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/registration/handlers.registration.handler.html#handlers.registration.handler.categories_handler"><code class="docutils literal notranslate"><span class="pre">categories_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/registration/handlers.registration.handler.html#handlers.registration.handler.currency_handler"><code class="docutils literal notranslate"><span class="pre">currency_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/registration/handlers.registration.handler.html#handlers.registration.handler.end_registration_handler"><code class="docutils literal notranslate"><span class="pre">end_registration_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/registration/handlers.registration.handler.html#handlers.registration.handler.set_language_handler"><code class="docutils literal notranslate"><span class="pre">set_language_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/registration/handlers.registration.handler.html#handlers.registration.handler.start_registration"><code class="docutils literal notranslate"><span class="pre">start_registration()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/registration/handlers.registration.states.html">States</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="handlers/settings_menu/index.html">Settings Menu Handlers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/index.html">Handlers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/add_categories/index.html">Add Categories</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/add_categories/handlers.settings_menu.categories_settings_menu.add_categories.handler.html">Handler</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/add_categories/handlers.settings_menu.categories_settings_menu.add_categories.handler.html#handlers.settings_menu.categories_settings_menu.add_categories.handler._ensure_safe_exit"><code class="docutils literal notranslate"><span class="pre">_ensure_safe_exit()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/add_categories/handlers.settings_menu.categories_settings_menu.add_categories.handler.html#handlers.settings_menu.categories_settings_menu.add_categories.handler.add_categories_handler"><code class="docutils literal notranslate"><span class="pre">add_categories_handler()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/add_categories/handlers.settings_menu.categories_settings_menu.add_categories.handler.html#handlers.settings_menu.categories_settings_menu.add_categories.handler.add_new_category_handler"><code class="docutils literal notranslate"><span class="pre">add_new_category_handler()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/add_categories/handlers.settings_menu.categories_settings_menu.add_categories.handler.html#handlers.settings_menu.categories_settings_menu.add_categories.handler.end_categories_input_handler"><code class="docutils literal notranslate"><span class="pre">end_categories_input_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/add_categories/handlers.settings_menu.categories_settings_menu.add_categories.states.html">States</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/add_categories/handlers.settings_menu.categories_settings_menu.add_categories.states.html#handlers.settings_menu.categories_settings_menu.add_categories.states.waiting_categories"><code class="docutils literal notranslate"><span class="pre">waiting_categories</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/index.html">Remove Category</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.handler.html">Handler</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.handler.html#handlers.settings_menu.categories_settings_menu.remove_category.handler._ensure_safe_exit"><code class="docutils literal notranslate"><span class="pre">_ensure_safe_exit()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.handler.html#handlers.settings_menu.categories_settings_menu.remove_category.handler._handle_cancel"><code class="docutils literal notranslate"><span class="pre">_handle_cancel()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.handler.html#handlers.settings_menu.categories_settings_menu.remove_category.handler._handle_categories_list"><code class="docutils literal notranslate"><span class="pre">_handle_categories_list()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.handler.html#handlers.settings_menu.categories_settings_menu.remove_category.handler._handle_confirm"><code class="docutils literal notranslate"><span class="pre">_handle_confirm()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.handler.html#handlers.settings_menu.categories_settings_menu.remove_category.handler.handle_category"><code class="docutils literal notranslate"><span class="pre">handle_category()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.handler.html#handlers.settings_menu.categories_settings_menu.remove_category.handler.handle_confirmation"><code class="docutils literal notranslate"><span class="pre">handle_confirmation()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.handler.html#handlers.settings_menu.categories_settings_menu.remove_category.handler.next_page_remove_category_button_handler"><code class="docutils literal notranslate"><span class="pre">next_page_remove_category_button_handler()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.handler.html#handlers.settings_menu.categories_settings_menu.remove_category.handler.prev_page_remove_category_button_handler"><code class="docutils literal notranslate"><span class="pre">prev_page_remove_category_button_handler()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.handler.html#handlers.settings_menu.categories_settings_menu.remove_category.handler.remove_category_handler"><code class="docutils literal notranslate"><span class="pre">remove_category_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/remove_category/handlers.settings_menu.categories_settings_menu.remove_category.states.html">States</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/categories_settings_menu_handler.html">Categories Settings Menu Handler</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/handlers.settings_menu.categories_settings_menu.handler.html">Handler</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/handlers.settings_menu.categories_settings_menu.handler.html#handlers.settings_menu.categories_settings_menu.handler._ensure_safe_exit"><code class="docutils literal notranslate"><span class="pre">_ensure_safe_exit()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/handlers.settings_menu.categories_settings_menu.handler.html#handlers.settings_menu.categories_settings_menu.handler.category_settings_menu_handler"><code class="docutils literal notranslate"><span class="pre">category_settings_menu_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/categories_settings_menu/handlers.settings_menu.categories_settings_menu.states.html">States</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/settings_menu/change_currency/index.html">Change Currency</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/settings_menu/change_currency/handlers.settings_menu.change_currency.handler.html">Handler</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/change_currency/handlers.settings_menu.change_currency.handler.html#handlers.settings_menu.change_currency.handler._ensure_safe_exit"><code class="docutils literal notranslate"><span class="pre">_ensure_safe_exit()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/change_currency/handlers.settings_menu.change_currency.handler.html#handlers.settings_menu.change_currency.handler._handle_cancel"><code class="docutils literal notranslate"><span class="pre">_handle_cancel()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/change_currency/handlers.settings_menu.change_currency.handler.html#handlers.settings_menu.change_currency.handler._handle_confirm"><code class="docutils literal notranslate"><span class="pre">_handle_confirm()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/change_currency/handlers.settings_menu.change_currency.handler.html#handlers.settings_menu.change_currency.handler.change_currency_handler"><code class="docutils literal notranslate"><span class="pre">change_currency_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/change_currency/handlers.settings_menu.change_currency.handler.html#handlers.settings_menu.change_currency.handler.handle_confirmation"><code class="docutils literal notranslate"><span class="pre">handle_confirmation()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/change_currency/handlers.settings_menu.change_currency.handler.html#handlers.settings_menu.change_currency.handler.set_currency_handler"><code class="docutils literal notranslate"><span class="pre">set_currency_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/settings_menu/change_currency/handlers.settings_menu.change_currency.states.html">States</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/settings_menu/change_language/index.html">Change Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/settings_menu/change_language/handlers.settings_menu.change_language.handler.html">Handler</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/change_language/handlers.settings_menu.change_language.handler.html#handlers.settings_menu.change_language.handler._ensure_safe_exit"><code class="docutils literal notranslate"><span class="pre">_ensure_safe_exit()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/change_language/handlers.settings_menu.change_language.handler.html#handlers.settings_menu.change_language.handler.change_language_handler"><code class="docutils literal notranslate"><span class="pre">change_language_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/change_language/handlers.settings_menu.change_language.handler.html#handlers.settings_menu.change_language.handler.set_language_handler"><code class="docutils literal notranslate"><span class="pre">set_language_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/settings_menu/change_language/handlers.settings_menu.change_language.states.html">States</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/change_language/handlers.settings_menu.change_language.states.html#handlers.settings_menu.change_language.states.waiting_for_language"><code class="docutils literal notranslate"><span class="pre">waiting_for_language</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/settings_menu/settings_menu_handler.html">Settings Menu Handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/settings_menu/handlers.settings_menu.handler.html">handlers.settings_menu.handler module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/handlers.settings_menu.handler.html#handlers.settings_menu.handler._ensure_safe_exit"><code class="docutils literal notranslate"><span class="pre">_ensure_safe_exit()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/handlers.settings_menu.handler.html#handlers.settings_menu.handler.settings_menu_handler"><code class="docutils literal notranslate"><span class="pre">settings_menu_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/settings_menu/handlers.settings_menu.states.html">handlers.settings_menu.states module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/settings_menu/handlers.settings_menu.states.html#handlers.settings_menu.states.settings_menu"><code class="docutils literal notranslate"><span class="pre">settings_menu</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="handlers/statistics_menu/index.html">Statistics Menu Handlers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/index.html">Custom Statistics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.constants.html">Constants</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.constants.html#handlers.statistics_menu.custom_statistics.constants.DEFAULT_PERIODS"><code class="docutils literal notranslate"><span class="pre">DEFAULT_PERIODS</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.constants.html#handlers.statistics_menu.custom_statistics.constants.CUSTOM_PERIODS"><code class="docutils literal notranslate"><span class="pre">CUSTOM_PERIODS</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.constants.html#handlers.statistics_menu.custom_statistics.constants.CATEGORIES_CHOOSE_PAGES_NAVIGATION"><code class="docutils literal notranslate"><span class="pre">CATEGORIES_CHOOSE_PAGES_NAVIGATION</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.constants.html#handlers.statistics_menu.custom_statistics.constants.STATISTICS_CATEGORIES_PAGES_NAVIGATION"><code class="docutils literal notranslate"><span class="pre">STATISTICS_CATEGORIES_PAGES_NAVIGATION</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.constants.html#handlers.statistics_menu.custom_statistics.constants.ALL_CATEGORIES_NAME"><code class="docutils literal notranslate"><span class="pre">ALL_CATEGORIES_NAME</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.constants.html#handlers.statistics_menu.custom_statistics.constants.END_CATEGORIES_SELECT_CALLBACK_DATA"><code class="docutils literal notranslate"><span class="pre">END_CATEGORIES_SELECT_CALLBACK_DATA</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html">Handler</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.custom_statistics_handler"><code class="docutils literal notranslate"><span class="pre">custom_statistics_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.handle_category"><code class="docutils literal notranslate"><span class="pre">handle_category()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.handle_custom_period_end_date"><code class="docutils literal notranslate"><span class="pre">handle_custom_period_end_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.handle_custom_period_selection"><code class="docutils literal notranslate"><span class="pre">handle_custom_period_selection()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.handle_custom_period_start_date"><code class="docutils literal notranslate"><span class="pre">handle_custom_period_start_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.handle_default_period_selection"><code class="docutils literal notranslate"><span class="pre">handle_default_period_selection()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.handle_end_category_select"><code class="docutils literal notranslate"><span class="pre">handle_end_category_select()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.next_page_category_expenses_button_handler"><code class="docutils literal notranslate"><span class="pre">next_page_category_expenses_button_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.next_page_choose_category_button_handler"><code class="docutils literal notranslate"><span class="pre">next_page_choose_category_button_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.prev_page_category_expenses_button_handler"><code class="docutils literal notranslate"><span class="pre">prev_page_category_expenses_button_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.handler.html#handlers.statistics_menu.custom_statistics.handler.prev_page_choose_category_button_handler"><code class="docutils literal notranslate"><span class="pre">prev_page_choose_category_button_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/statistics_menu/custom_statistics/handlers.statistics_menu.custom_statistics.states.html">States</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/statistics_menu/month_statistics/index.html">Month Statistics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.constants.html">Constants</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.constants.html#handlers.statistics_menu.month_statistics.constants.ALL_CATEGORIES_NAME"><code class="docutils literal notranslate"><span class="pre">ALL_CATEGORIES_NAME</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.constants.html#handlers.statistics_menu.month_statistics.constants.END_CATEGORIES_SELECT_CALLBACK_DATA"><code class="docutils literal notranslate"><span class="pre">END_CATEGORIES_SELECT_CALLBACK_DATA</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.constants.html#handlers.statistics_menu.month_statistics.constants.STATISTICS_CATEGORIES_PAGES_NAVIGATION"><code class="docutils literal notranslate"><span class="pre">STATISTICS_CATEGORIES_PAGES_NAVIGATION</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.constants.html#handlers.statistics_menu.month_statistics.constants.CATEGORIES_CHOOSE_PAGES_NAVIGATION"><code class="docutils literal notranslate"><span class="pre">CATEGORIES_CHOOSE_PAGES_NAVIGATION</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.handler.html">Handler</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.handler.html#handlers.statistics_menu.month_statistics.handler.handle_category"><code class="docutils literal notranslate"><span class="pre">handle_category()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.handler.html#handlers.statistics_menu.month_statistics.handler.handle_end_category_select"><code class="docutils literal notranslate"><span class="pre">handle_end_category_select()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.handler.html#handlers.statistics_menu.month_statistics.handler.month_statistcs_handler"><code class="docutils literal notranslate"><span class="pre">month_statistcs_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.handler.html#handlers.statistics_menu.month_statistics.handler.next_page_category_expenses_button_handler"><code class="docutils literal notranslate"><span class="pre">next_page_category_expenses_button_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.handler.html#handlers.statistics_menu.month_statistics.handler.next_page_choose_category_button_handler"><code class="docutils literal notranslate"><span class="pre">next_page_choose_category_button_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.handler.html#handlers.statistics_menu.month_statistics.handler.prev_page_category_expenses_button_handler"><code class="docutils literal notranslate"><span class="pre">prev_page_category_expenses_button_handler()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.handler.html#handlers.statistics_menu.month_statistics.handler.prev_page_choose_category_button_handler"><code class="docutils literal notranslate"><span class="pre">prev_page_choose_category_button_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/statistics_menu/month_statistics/handlers.statistics_menu.month_statistics.states.html">States</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/statistics_menu/statistics_menu_handler.html">Statistics Menu Handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/statistics_menu/handlers.statistics_menu.handler.html">Handler</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/handlers.statistics_menu.handler.html#handlers.statistics_menu.handler._ensure_safe_exit"><code class="docutils literal notranslate"><span class="pre">_ensure_safe_exit()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="handlers/statistics_menu/handlers.statistics_menu.handler.html#handlers.statistics_menu.handler.settings_menu_handler"><code class="docutils literal notranslate"><span class="pre">settings_menu_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/statistics_menu/handlers.statistics_menu.states.html">States</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/statistics_menu/handlers.statistics_menu.statistics_utils.html">Statistics Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="handlers/modules.html">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="handlers/handlers.error_utils.html">Error Utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.error_utils.html#handlers.error_utils.SafeExitProtocol"><code class="docutils literal notranslate"><span class="pre">SafeExitProtocol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.error_utils.html#handlers.error_utils.get_state_field_or_send_error"><code class="docutils literal notranslate"><span class="pre">get_state_field_or_send_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.error_utils.html#handlers.error_utils.get_text_or_send_error"><code class="docutils literal notranslate"><span class="pre">get_text_or_send_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.error_utils.html#handlers.error_utils.handle_error_situation"><code class="docutils literal notranslate"><span class="pre">handle_error_situation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/handlers.handlers_utils.html">Handlers Utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handlers/handlers.keyboards.html">Keyboards</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards._get_basic_buttons"><code class="docutils literal notranslate"><span class="pre">_get_basic_buttons()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards._get_common_buttons"><code class="docutils literal notranslate"><span class="pre">_get_common_buttons()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards._get_main_menu_button"><code class="docutils literal notranslate"><span class="pre">_get_main_menu_button()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards.get_add_categories_keyboard"><code class="docutils literal notranslate"><span class="pre">get_add_categories_keyboard()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards.get_category_settings_menu_keyboard"><code class="docutils literal notranslate"><span class="pre">get_category_settings_menu_keyboard()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards.get_language_inline_keyboard"><code class="docutils literal notranslate"><span class="pre">get_language_inline_keyboard()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards.get_menu_keyboard"><code class="docutils literal notranslate"><span class="pre">get_menu_keyboard()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards.get_menu_keyboard_error_tg_id"><code class="docutils literal notranslate"><span class="pre">get_menu_keyboard_error_tg_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards.get_post_menu_keyboard"><code class="docutils literal notranslate"><span class="pre">get_post_menu_keyboard()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards.get_settings_menu_keyboard"><code class="docutils literal notranslate"><span class="pre">get_settings_menu_keyboard()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="handlers/handlers.keyboards.html#handlers.keyboards.get_statistics_menu_keyboard"><code class="docutils literal notranslate"><span class="pre">get_statistics_menu_keyboard()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bot.html">Bot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bot.html#bot.API_TOKEN"><code class="docutils literal notranslate"><span class="pre">API_TOKEN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bot.html#bot.bot"><code class="docutils literal notranslate"><span class="pre">bot</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bot.html#bot.send_message_to_user"><code class="docutils literal notranslate"><span class="pre">send_message_to_user()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Bot Config</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#config.redis_client"><code class="docutils literal notranslate"><span class="pre">redis_client</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#config.storage"><code class="docutils literal notranslate"><span class="pre">storage</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#config.i18n_middleware"><code class="docutils literal notranslate"><span class="pre">i18n_middleware</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dispatcher.html">Dispatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="middleware.html">Middleware</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="middleware.html#middleware.LocaleManager"><code class="docutils literal notranslate"><span class="pre">LocaleManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="middleware.html#middleware.LocaleManager._abc_impl"><code class="docutils literal notranslate"><span class="pre">LocaleManager._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="middleware.html#middleware.LocaleManager._get_locale_from_state"><code class="docutils literal notranslate"><span class="pre">LocaleManager._get_locale_from_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="middleware.html#middleware.LocaleManager.get_locale"><code class="docutils literal notranslate"><span class="pre">LocaleManager.get_locale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="middleware.html#middleware.LocaleManager.set_locale"><code class="docutils literal notranslate"><span class="pre">LocaleManager.set_locale()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="run_bot.html">Run Bot Script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="run_bot.html#run_bot._reset_redis_db"><code class="docutils literal notranslate"><span class="pre">_reset_redis_db()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="run_bot.html#run_bot.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="💸 Expense Tracker Bot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="database/index.html" class="btn btn-neutral float-right" title="Database" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, balconyRewrap.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
