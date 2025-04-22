@@ -132,7 +132,8 @@ def _get_period(period: ExpensePeriod | None) -> CustomPeriod | None:
             If None, no period is provided.
 
     Returns:
-        CustomPeriod | None: A tuple containing the start date and today's date if the period is valid.
+        (CustomPeriod | None):
+            A tuple containing the start date and today's date if the period is valid.
             Returns None if the period is not provided or invalid.
     """
     if not period:
@@ -192,6 +193,7 @@ def _get_start_date(period: ExpensePeriod) -> date | None:  # noqa: WPS212
 
     Args:
         period (ExpensePeriod): The period for which the start date is to be calculated.
+
             - ExpensePeriod.DAY: Returns the date one day before today.
             - ExpensePeriod.WEEK: Returns the date one week before today.
             - ExpensePeriod.MONTH: Returns the date one month before today.

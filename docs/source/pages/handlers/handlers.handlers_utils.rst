@@ -5,5 +5,4 @@ Handlers Utils
    :members:
    :private-members:
    :show-inheritance:
-   :undoc-members:
    :no-index:

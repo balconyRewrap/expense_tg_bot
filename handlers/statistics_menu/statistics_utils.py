@@ -426,8 +426,9 @@ def _is_custom_period_valid(start_date: date | None, end_date: date | None) -> b
         end_date (date | None): The end date of the period. Can be None.
 
     Returns:
-        bool: True if both dates are provided and the start date is less than or equal to the end date,
-              otherwise False.
+        bool:
+            True if both dates are provided and the start date is less than or equal to the end date,
+            otherwise False.
     """
     if not (start_date and end_date):
         return False

@@ -1,6 +1,6 @@
 """Module configures the necessary components for the expense Telegram bot.
 
-Variables:
+Attributes:
     redis_client (Redis): Redis client configured with host, port, and database from environment variables.
     storage (RedisStorage): Redis-based storage for FSM.
     i18n_middleware (I18nMiddleware): Middleware for handling internationalization with default locale set to Russian.

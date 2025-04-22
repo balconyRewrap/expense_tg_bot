@@ -5,5 +5,4 @@ Statistics Utilities
    :members:
    :private-members:
    :show-inheritance:
-   :undoc-members:
    :no-index:

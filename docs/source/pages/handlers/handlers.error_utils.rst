@@ -5,4 +5,3 @@ Error Utils
    :members:
    :private-members:
    :show-inheritance:
-   :undoc-members:

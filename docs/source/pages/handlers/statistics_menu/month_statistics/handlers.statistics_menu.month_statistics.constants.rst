@@ -1,4 +1,4 @@
-constants
+Constants
 ============================================================
 
 .. automodule:: handlers.statistics_menu.month_statistics.constants
