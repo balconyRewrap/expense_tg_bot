@@ -4,9 +4,9 @@ It sets up middleware, includes various routers for handling bot commands and in
 and organizes the bot's functionality into modular components.
 
 Usage:
-This module is intended to be imported and executed as part of the bot's initialization process.
-It ensures that all necessary routers and middleware are properly
-configured and included in the dispatcher.
+    This module is intended to be imported and executed as part of the bot's initialization process.
+    It ensures that all necessary routers and middleware are properly
+    configured and included in the dispatcher.
 """
 from aiogram import Dispatcher
 

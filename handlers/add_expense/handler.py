@@ -387,8 +387,9 @@ def _parse_amount(text: str) -> float | None:
         text (str): The text to be parsed.
 
     Returns:
-        (float | None): The parsed amount if it is a valid float within the allowed range,
-                    otherwise None.
+        (float | None):
+            The parsed amount if it is a valid float within the allowed range,
+            otherwise None.
     """
     try:
         amount = float(text)

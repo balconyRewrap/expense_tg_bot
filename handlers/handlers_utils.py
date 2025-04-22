@@ -16,7 +16,12 @@ MAXIMUM_CATEGORIES_PER_PAGE = 6
 
 @dataclass
 class NavigationCallbackData:
-    """NavigationCallbackData is a data class that represents the callback data for navigation buttons."""
+    """Class to represent navigation callback data for handling pagination and navigation.
+
+    Attributes:
+        next_page (str): The identifier or data for the next page.
+        prev_page (str): The identifier or data for the previous page.
+    """
 
     next_page: str
     prev_page: str

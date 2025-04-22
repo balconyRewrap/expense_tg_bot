@@ -113,6 +113,7 @@ async def end_registration_handler(message: types.Message, state: FSMContext, i1
     """Handle the end of the registration process.
 
     This asynchronous function handles the end of the registration process by performing the following steps:
+
     1. Retrieves the user information from the message.
     2. Retrieves the current state data.
     3. If the user information is not present, it handles the error.

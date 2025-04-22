@@ -24,8 +24,8 @@ async def send_message_to_user(user_id: int, text: str) -> None:
         text (str): The text of the message to be sent.
 
     Logs:
-        Info: Logs a message indicating that the message was sent successfully.
-        Error: Logs an error message if there was an issue sending the message.
+        - Info: Logs a message indicating that the message was sent successfully.
+        - Error: Logs an error message if there was an issue sending the message.
     """
     try:
         await bot.send_message(chat_id=user_id, text=text)

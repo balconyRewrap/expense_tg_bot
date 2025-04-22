@@ -1,13 +1,7 @@
 """Script serves as the entry point for running the Telegram bot.
 
-Functions:
-    _reset_redis_db: Asynchronously resets the Redis database by deleting all keys.
-
-    main: Asynchronous main entry point for the bot, which resets the Redis database
-          and starts polling for updates.
-
 Command-line Arguments:
-    --init-db: If provided, initializes the database instead of running the bot.
+    - ``--init-db``: If provided, initializes the database instead of running the bot.
 """
 import argparse
 import asyncio
