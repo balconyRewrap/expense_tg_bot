@@ -1,15 +1,20 @@
-"""Module serves as the entry point for running the Telegram bot.
+"""Script serves as the entry point for running the Telegram bot.
 
-It performs the following tasks:
-    - Imports necessary modules and components.
-    - Defines an asynchronous function to reset the Redis database.
-    - Defines the main asynchronous function to reset the Redis database and start polling the bot for updates.
-    - Runs the main function using asyncio when the module is executed as the main program.
+Functions:
+    _reset_redis_db: Asynchronously resets the Redis database by deleting all keys.
+    main: Asynchronous main entry point for the bot, which resets the Redis database
+          and starts polling for updates.
+
+Command-line Arguments:
+    --init-db: If provided, initializes the database instead of running the bot.
 """
+import argparse
 import asyncio
+from html import parser
 
 from bot import bot
 from config import redis_client
+from database.init_db import init_db
 from dispatcher import dp
 
 
@@ -36,4 +41,14 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description="Run the bot.")
+    parser.add_argument(
+        "--init-db",
+        action="store_true",
+        help="Initialize the database.",
+    )
+    args = parser.parse_args()
+    if args.init_db:
+        asyncio.run(init_db())
+    else:
+        asyncio.run(main())
